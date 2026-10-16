@@ -1,0 +1,17 @@
+<footer class="footer mks-footer">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <p><strong>{{ site.author.name }}</strong>{% if site.author.formation %} · {{ site.author.formation }}{% endif %}</p>
+        <p class="is-size-7">© {{ 'now' | date: '%Y' }} · Site généré avec Jekyll et le thème
+          <a href="https://github.com/Makerspace-Amiens/portfolio-theme">portfolio MakerSpace UniLaSalle Amiens</a>.</p>
+      </div>
+      <div class="column is-narrow mks-social">
+        {% for l in site.author.links %}
+          <a href="{{ l.url }}" title="{{ l.label }}" aria-label="{{ l.label }}"><i data-lucide="{{ l.icon | default: 'link' }}"></i></a>
+        {% endfor %}
+        <a href="{{ '/feed.xml' | relative_url }}" title="Flux RSS" aria-label="Flux RSS"><i data-lucide="rss"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>

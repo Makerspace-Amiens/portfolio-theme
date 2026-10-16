@@ -1,0 +1,58 @@
+---
+layout: default
+---
+{% assign cv = site.data.cv %}
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <aside class="column is-4">
+        <div class="box has-text-centered mks-profil">
+          {% if site.author.avatar %}<figure class="image is-128x128 mx-auto mb-4"><img class="is-rounded mks-avatar" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}"></figure>{% endif %}
+          <p class="title is-4">{{ site.author.name }}</p>
+          {% if site.author.formation %}<p class="subtitle is-6">{{ site.author.formation }}</p>{% endif %}
+          {% if site.author.localisation %}<p class="is-size-7"><i data-lucide="map-pin" class="mks-icon-sm"></i> {{ site.author.localisation }}</p>{% endif %}
+          <div class="mks-social mt-3">
+            {% for l in site.author.links %}<a href="{{ l.url }}" title="{{ l.label }}"><i data-lucide="{{ l.icon | default: 'link' }}"></i></a>{% endfor %}
+          </div>
+          {% if cv.pdf %}<a class="button is-primary is-fullwidth mt-4" href="{{ cv.pdf | relative_url }}" download><i data-lucide="download" class="mks-icon"></i><span>Télécharger mon CV</span></a>{% endif %}
+        </div>
+        {% if cv.langues %}
+        <div class="box">
+          <p class="has-text-weight-bold mb-2"><i data-lucide="languages" class="mks-icon-sm"></i> Langues</p>
+          {% for l in cv.langues %}<p>{{ l.langue }} <span class="tag is-light is-pulled-right">{{ l.niveau }}</span></p>{% endfor %}
+        </div>
+        {% endif %}
+        {% if cv.outils %}
+        <div class="box">
+          <p class="has-text-weight-bold mb-2"><i data-lucide="wrench" class="mks-icon-sm"></i> Outils</p>
+          <div class="tags">{% for o in cv.outils %}<span class="tag is-primary is-light">{{ o }}</span>{% endfor %}</div>
+        </div>
+        {% endif %}
+        {% if cv.interets %}
+        <div class="box">
+          <p class="has-text-weight-bold mb-2"><i data-lucide="heart" class="mks-icon-sm"></i> Centres d'intérêt</p>
+          <div class="tags">{% for o in cv.interets %}<span class="tag">{{ o }}</span>{% endfor %}</div>
+        </div>
+        {% endif %}
+      </aside>
+
+      <div class="column is-8">
+        <h1 class="title is-2">{{ page.title | default: 'Qui suis-je ?' }}</h1>
+        <div class="content mks-content">{{ content }}</div>
+
+        {% for section in cv.sections %}
+        <h2 class="title is-4 mks-section-title mt-6"><i data-lucide="{{ section.icon | default: 'circle' }}" class="mks-icon"></i> {{ section.titre }}</h2>
+        <div class="mks-timeline">
+          {% for e in section.elements %}
+          <div class="mks-timeline-item">
+            <p class="is-size-7 has-text-grey">{{ e.periode }}{% if e.lieu %} · {{ e.lieu }}{% endif %}</p>
+            <p class="has-text-weight-bold">{{ e.titre }}{% if e.organisme %} — {{ e.organisme }}{% endif %}</p>
+            {% if e.description %}<div class="content is-small">{{ e.description | markdownify }}</div>{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

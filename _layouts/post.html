@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <article class="column {% if page.toc %}is-9{% else %}is-8 is-offset-2{% endif %}">
+        <p class="is-size-7 has-text-grey mb-2">
+          <i data-lucide="calendar" class="mks-icon-sm"></i> {{ page.date | date: '%d/%m/%Y' }}
+          {% for cat in page.categories %} · <span class="tag is-primary is-light">{{ cat }}</span>{% endfor %}
+        </p>
+        <h1 class="title is-2">{{ page.title }}</h1>
+        {% if page.description %}<p class="subtitle is-5 has-text-grey">{{ page.description }}</p>{% endif %}
+        {% if page.image %}<figure class="image mb-5"><img class="mks-rounded" src="{{ page.image | relative_url }}" alt=""></figure>{% endif %}
+        <div class="content mks-content" id="mks-article">{{ content }}</div>
+        {% include competences-liees.html item=page %}
+        <nav class="level mt-6">
+          <div class="level-left">{% if page.previous %}<a class="button is-light" href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>{% endif %}</div>
+          <div class="level-right">{% if page.next %}<a class="button is-light" href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>{% endif %}</div>
+        </nav>
+      </article>
+      {% if page.toc %}<aside class="column is-3 is-hidden-touch">{% include toc.html %}</aside>{% endif %}
+    </div>
+  </div>
+</section>

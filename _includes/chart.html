@@ -1,0 +1,31 @@
+{% comment %}
+  Graphique Chart.js — doc : https://www.chartjs.org/docs/latest/
+  Mode simple :
+    {% include chart.html type="bar" titre="Mesures" labels="Lun,Mar,Mer" valeurs="12,19,7" legende="Température (°C)" %}
+  Mode données (fichier _data/mesures.yml ou .json au format Chart.js { labels: [...], datasets: [...] }) :
+    {% include chart.html type="line" donnees="mesures" titre="Essais moteur" %}
+  type : bar, line, pie, doughnut, radar, scatter, polarArea
+{% endcomment %}
+{% assign base = include.id | default: include.donnees | default: include.titre | default: 'graph' | slugify %}
+{% capture cid %}mks-chart-{{ base }}-{{ include.valeurs | size }}{% endcapture %}
+<figure class="mks-chart-figure">
+  <div class="mks-chart" style="height: {{ include.hauteur | default: 320 }}px">
+    <canvas id="{{ cid }}"></canvas>
+  </div>
+  {% if include.titre %}<figcaption>{{ include.titre }}</figcaption>{% endif %}
+</figure>
+<script>
+  (window.MKS_CHARTS = window.MKS_CHARTS || []).push({
+    id: {{ cid | jsonify }},
+    type: {{ include.type | default: 'bar' | jsonify }},
+    {% if include.donnees %}
+    data: {{ site.data[include.donnees] | jsonify }},
+    {% else %}
+    data: {
+      labels: {{ include.labels | split: ',' | jsonify }},
+      datasets: [{ label: {{ include.legende | default: '' | jsonify }}, data: [{{ include.valeurs }}] }]
+    },
+    {% endif %}
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+</script>

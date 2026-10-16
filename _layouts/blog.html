@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<section class="section">
+  <div class="container mks-narrow">
+    <h1 class="title is-2">{{ page.title | default: 'Blog' }}</h1>
+    <div class="content mks-content">{{ content }}</div>
+    {% for post in site.posts %}
+      {% include carte-post.html post=post %}
+    {% else %}
+      <p class="has-text-grey">Aucun article pour le moment.</p>
+    {% endfor %}
+  </div>
+</section>

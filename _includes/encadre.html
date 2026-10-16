@@ -1,0 +1,16 @@
+{% comment %}
+  Encadré (notification Bulma) — doc : https://bulma.io/documentation/elements/notification/
+  {% include encadre.html type="info" titre="À savoir" texte="Le texte peut contenir du **Markdown**." %}
+  type : info, succes, attention, danger, astuce
+{% endcomment %}
+{% case include.type %}
+  {% when 'succes' %}{% assign cls = 'is-success' %}{% assign ico = 'circle-check' %}
+  {% when 'attention' %}{% assign cls = 'is-warning' %}{% assign ico = 'triangle-alert' %}
+  {% when 'danger' %}{% assign cls = 'is-danger' %}{% assign ico = 'octagon-alert' %}
+  {% when 'astuce' %}{% assign cls = 'is-primary' %}{% assign ico = 'lightbulb' %}
+  {% else %}{% assign cls = 'is-info' %}{% assign ico = 'info' %}
+{% endcase %}
+<div class="notification {{ cls }} is-light mks-encadre">
+  {% if include.titre %}<p class="has-text-weight-bold"><i data-lucide="{{ ico }}" class="mks-icon-sm"></i> {{ include.titre }}</p>{% endif %}
+  {{ include.texte | markdownify }}
+</div>

@@ -1,0 +1,46 @@
+---
+layout: default
+---
+{% assign docs = site.docs | sort: 'nav_order' %}
+{% assign groupes = docs | group_by: 'section' %}
+<section class="section">
+  <div class="container is-fluid mks-doc-container">
+    <div class="columns">
+      <aside class="column is-2-desktop is-3-tablet mks-doc-nav">
+        <p class="mks-toc-title"><i data-lucide="book-open" class="mks-icon-sm"></i> Documentation</p>
+        <aside class="menu">
+          {% for g in groupes %}
+            {% if g.name != '' %}<p class="menu-label">{{ g.name }}</p>{% endif %}
+            <ul class="menu-list">
+              {% for d in g.items %}
+                <li><a href="{{ d.url | relative_url }}" {% if d.url == page.url %}class="is-active"{% endif %}>{{ d.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endfor %}
+        </aside>
+      </aside>
+
+      <article class="column">
+        <h1 class="title is-2">{{ page.title }}</h1>
+        {% if page.description %}<p class="subtitle is-5 has-text-grey">{{ page.description }}</p>{% endif %}
+        <div class="content mks-content" id="mks-article">{{ content }}</div>
+        {% include competences-liees.html item=page %}
+
+        {% for d in docs %}
+          {% if d.url == page.url %}
+            {% assign i_prev = forloop.index0 | minus: 1 %}
+            {% assign i_next = forloop.index0 | plus: 1 %}
+            <nav class="level mt-6">
+              <div class="level-left">{% if i_prev >= 0 %}<a class="button is-light" href="{{ docs[i_prev].url | relative_url }}">← {{ docs[i_prev].title }}</a>{% endif %}</div>
+              <div class="level-right">{% if docs[i_next] %}<a class="button is-light" href="{{ docs[i_next].url | relative_url }}">{{ docs[i_next].title }} →</a>{% endif %}</div>
+            </nav>
+          {% endif %}
+        {% endfor %}
+      </article>
+
+      {% if page.toc != false %}
+      <aside class="column is-2 is-hidden-touch">{% include toc.html %}</aside>
+      {% endif %}
+    </div>
+  </div>
+</section>

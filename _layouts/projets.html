@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">{{ page.title | default: 'Projets' }}</h1>
+    <div class="content mks-content">{{ content }}</div>
+
+    {% assign projets = site.projets | sort: 'date' | reverse %}
+    {% assign tous_tags = '' | split: '' %}
+    {% for p in projets %}{% for t in p.tags %}{% assign tous_tags = tous_tags | push: t %}{% endfor %}{% endfor %}
+    {% assign tous_tags = tous_tags | uniq | sort %}
+
+    {% if tous_tags.size > 0 %}
+    <div class="buttons mks-filtres" role="group" aria-label="Filtrer les projets">
+      <button class="button is-small is-primary" data-filtre="*">Tous</button>
+      {% for t in tous_tags %}<button class="button is-small" data-filtre="{{ t | slugify }}">{{ t }}</button>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="columns is-multiline">
+      {% for projet in projets %}
+        <div class="column is-one-third-desktop is-half-tablet mks-projet-item" data-tags="{% for t in projet.tags %}{{ t | slugify }} {% endfor %}">
+          {% include carte-projet.html projet=projet %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

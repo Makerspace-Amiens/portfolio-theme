@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<section class="hero mks-hero is-medium">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        {% if site.author.avatar %}
+        <div class="column is-narrow">
+          <figure class="image is-128x128"><img class="is-rounded mks-avatar" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}"></figure>
+        </div>
+        {% endif %}
+        <div class="column">
+          <p class="title is-2">{{ page.hero_title | default: site.author.name }}</p>
+          <p class="subtitle is-5">{{ page.hero_subtitle | default: site.author.bio }}</p>
+          <div class="buttons">
+            <a class="button is-primary" href="{{ '/projets/' | relative_url }}"><i data-lucide="layout-grid" class="mks-icon"></i><span>Mes projets</span></a>
+            <a class="button is-light" href="{{ '/competences/' | relative_url }}"><i data-lucide="radar" class="mks-icon"></i><span>Mes compétences</span></a>
+            <a class="button is-light" href="{{ '/about/' | relative_url }}"><i data-lucide="user" class="mks-icon"></i><span>Qui suis-je</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container content mks-content">
+    {{ content }}
+  </div>
+</section>
+
+{% assign projets = site.projets | sort: 'date' | reverse %}
+{% if projets.size > 0 %}
+<section class="section pt-0">
+  <div class="container">
+    <h2 class="title is-4 mks-section-title">Projets récents</h2>
+    <div class="columns is-multiline">
+      {% for projet in projets limit: 3 %}
+        <div class="column is-one-third-desktop is-half-tablet">{% include carte-projet.html projet=projet %}</div>
+      {% endfor %}
+    </div>
+    <a href="{{ '/projets/' | relative_url }}">Tous les projets →</a>
+  </div>
+</section>
+{% endif %}
+
+{% if site.posts.size > 0 %}
+<section class="section pt-0">
+  <div class="container">
+    <h2 class="title is-4 mks-section-title">Dernières news</h2>
+    {% for post in site.posts limit: 3 %}{% include carte-post.html post=post %}{% endfor %}
+    <a href="{{ '/blog/' | relative_url }}">Tout le blog →</a>
+  </div>
+</section>
+{% endif %}

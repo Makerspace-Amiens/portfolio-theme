@@ -1,0 +1,14 @@
+{% comment %}
+  Visualiseur KiCad (schéma, PCB, projet) avec KiCanvas — doc : https://kicanvas.org/
+  {% include kicanvas.html src="/assets/kicad/ma-carte.kicad_sch" %}
+  {% include kicanvas.html src="/assets/kicad/ma-carte.kicad_pcb" hauteur=600 titre="PCB face avant" %}
+  Plusieurs fichiers (schéma + PCB dans le même visualiseur) :
+  {% include kicanvas.html src="/assets/kicad/ma-carte.kicad_sch" src2="/assets/kicad/ma-carte.kicad_pcb" %}
+{% endcomment %}
+<figure class="mks-embed">
+  <kicanvas-embed controls="{{ include.controles | default: 'basic' }}" style="height: {{ include.hauteur | default: 500 }}px">
+    <kicanvas-source src="{% if include.src contains '://' %}{{ include.src }}{% else %}{{ include.src | relative_url }}{% endif %}"></kicanvas-source>
+    {% if include.src2 %}<kicanvas-source src="{% if include.src2 contains '://' %}{{ include.src2 }}{% else %}{{ include.src2 | relative_url }}{% endif %}"></kicanvas-source>{% endif %}
+  </kicanvas-embed>
+  {% if include.titre %}<figcaption>{{ include.titre }}</figcaption>{% endif %}
+</figure>

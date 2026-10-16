@@ -1,0 +1,116 @@
+/* Thème portfolio MakerSpace UniLaSalle Amiens — surcouche de Bulma 1.x
+   Variables Bulma : https://bulma.io/documentation/customize/with-css-variables/ */
+
+:root {
+  --mks-primary: #ef2e31;      /* rouge UniLaSalle / doc MakerSpace */
+  --mks-dark: #1f2a37;
+  --mks-surface: #f5f6f8;
+  --mks-radius: 10px;
+
+  --bulma-primary-h: 359deg;
+  --bulma-primary-s: 86%;
+  --bulma-primary-l: 56%;
+  --bulma-link-h: 359deg;
+  --bulma-link-s: 70%;
+  --bulma-link-l: 45%;
+  --bulma-family-primary: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body { background: #fff; }
+body { display: flex; flex-direction: column; min-height: 100vh; }
+main { flex: 1; }
+
+/* Navigation */
+.mks-navbar { border-bottom: 3px solid var(--mks-primary); }
+.mks-brand { font-weight: 700; gap: .5rem; }
+.mks-brand-avatar { border-radius: 50%; max-height: 2rem !important; }
+.mks-navbar .navbar-item.is-active { color: var(--mks-primary); font-weight: 600; }
+.navbar-item .mks-icon { margin-right: .35rem; }
+
+/* Icônes Lucide */
+.mks-icon { width: 1.1em; height: 1.1em; vertical-align: -0.18em; }
+.mks-icon-sm { width: .95em; height: .95em; vertical-align: -0.12em; }
+.mks-icon-inline { width: 1.2em; height: 1.2em; vertical-align: -0.2em; }
+.button .mks-icon { margin-right: .4rem; }
+
+/* Hero */
+.mks-hero { background: linear-gradient(135deg, var(--mks-surface) 0%, #fff 60%); border-bottom: 1px solid #e5e7eb; }
+.mks-hero-small { background: var(--mks-surface); border-bottom: 1px solid #e5e7eb; }
+.mks-avatar { border: 4px solid #fff; box-shadow: 0 4px 16px rgba(0,0,0,.12); object-fit: cover; aspect-ratio: 1; }
+
+.mks-section-title { border-left: 4px solid var(--mks-primary); padding-left: .75rem; }
+.mks-narrow { max-width: 820px; }
+.mks-rounded { border-radius: var(--mks-radius); }
+
+/* Contenu */
+.mks-content img { border-radius: var(--mks-radius); }
+.mks-content h2 { border-bottom: 1px solid #e5e7eb; padding-bottom: .3rem; margin-top: 2rem; }
+.mks-content pre { border-radius: var(--mks-radius); }
+.mks-content table { font-size: .95rem; }
+.mks-content blockquote { border-left-color: var(--mks-primary); }
+
+/* Cartes projets */
+.mks-card { display: flex; flex-direction: column; height: 100%; border-radius: var(--mks-radius); overflow: hidden;
+  transition: transform .15s ease, box-shadow .15s ease; color: inherit; }
+.mks-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+.mks-card .card-content { flex: 1; }
+.mks-card .card-image img { object-fit: cover; }
+.mks-card-desc { color: #4b5563; font-size: .95rem; }
+.mks-card-placeholder { position: absolute; inset: 0; display: grid; place-items: center; background: var(--mks-surface); color: var(--mks-primary); }
+.mks-card-placeholder svg { width: 48px; height: 48px; }
+.mks-projet-item.is-hidden { display: none; }
+
+/* Blog */
+.mks-post-item { border-left: 3px solid transparent; transition: border-color .15s; }
+.mks-post-item:hover { border-left-color: var(--mks-primary); }
+
+/* TOC & doc */
+.mks-toc { position: sticky; top: 1.5rem; font-size: .9rem; }
+.mks-toc-title { font-weight: 700; text-transform: uppercase; font-size: .75rem; letter-spacing: .05em; color: #6b7280; margin-bottom: .5rem; }
+.mks-toc-list { border-left: 2px solid #e5e7eb; }
+.mks-toc-list a { display: block; padding: .2rem .75rem; color: #4b5563; margin-left: -2px; border-left: 2px solid transparent; }
+.mks-toc-list a:hover, .mks-toc-list a.is-active { color: var(--mks-primary); border-left-color: var(--mks-primary); }
+.mks-toc-list .toc-h3 a { padding-left: 1.5rem; font-size: .85rem; }
+.mks-doc-nav { border-right: 1px solid #e5e7eb; }
+.mks-doc-nav .menu-list a.is-active { background: var(--mks-primary); color: #fff; }
+.mks-doc-container { max-width: 1440px; }
+
+/* About / CV */
+.mks-social { display: flex; gap: .75rem; justify-content: center; }
+.mks-social a { color: #4b5563; }
+.mks-social a:hover { color: var(--mks-primary); }
+.mks-timeline { border-left: 2px solid #e5e7eb; margin-left: .5rem; }
+.mks-timeline-item { position: relative; padding: 0 0 1.5rem 1.5rem; }
+.mks-timeline-item::before { content: ""; position: absolute; left: -7px; top: .3rem; width: 12px; height: 12px; border-radius: 50%; background: var(--mks-primary); border: 2px solid #fff; }
+
+/* Compétences */
+.mks-radar-box { padding: 1rem; }
+.mks-competence { scroll-margin-top: 1rem; border-left: 4px solid var(--mks-primary); }
+.mks-competence:target { box-shadow: 0 0 0 3px rgba(239,46,49,.35); }
+.mks-niveau { display: inline-flex; gap: 4px; }
+.mks-niveau span { width: 22px; height: 8px; border-radius: 4px; background: #e5e7eb; }
+.mks-niveau span.is-on { background: var(--mks-primary); }
+.mks-niveau span.is-target { background: repeating-linear-gradient(45deg, #fca5a5, #fca5a5 3px, #fee2e2 3px, #fee2e2 6px); }
+.mks-preuves summary { cursor: pointer; font-weight: 600; color: #374151; margin-top: .5rem; }
+.mks-preuves ul { list-style: none; margin: .5rem 0 0; }
+.mks-preuves li { padding: .2rem 0; }
+.mks-competences-liees { background: var(--mks-surface); box-shadow: none; }
+
+/* Médias intégrés */
+.mks-embed, .mks-chart-figure { margin: 1.5rem 0; }
+.mks-embed figcaption, .mks-chart-figure figcaption { text-align: center; font-size: .85rem; color: #6b7280; margin-top: .4rem; }
+.mks-embed kicanvas-embed { display: block; width: 100%; border: 1px solid #e5e7eb; border-radius: var(--mks-radius); overflow: hidden; }
+.mks-embed model-viewer { border-radius: var(--mks-radius); }
+.mks-chart { position: relative; }
+.mks-video { position: relative; aspect-ratio: 16 / 9; }
+.mks-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: var(--mks-radius); }
+.mermaid { text-align: center; margin: 1.5rem 0; }
+.mks-encadre p:last-child { margin-bottom: 0; }
+
+/* Pied de page */
+.mks-footer { background: var(--mks-dark); color: #d1d5db; padding: 2rem 1.5rem; }
+.mks-footer a { color: #fff; }
+.mks-footer .mks-social a { color: #d1d5db; }
+.mks-footer .mks-social a:hover { color: var(--mks-primary); }
+
+@media (prefers-reduced-motion: reduce) { .mks-card { transition: none; } .mks-card:hover { transform: none; } }

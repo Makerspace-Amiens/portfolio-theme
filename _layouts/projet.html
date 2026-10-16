@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<section class="hero mks-hero-small">
+  <div class="hero-body">
+    <div class="container">
+      <p class="is-size-7 mb-2"><a href="{{ '/projets/' | relative_url }}">← Projets</a></p>
+      <h1 class="title is-2">{{ page.title }}</h1>
+      {% if page.description %}<p class="subtitle is-5">{{ page.description }}</p>{% endif %}
+      <div class="tags">
+        {% if page.statut %}<span class="tag is-primary">{{ page.statut }}</span>{% endif %}
+        {% if page.date %}<span class="tag is-white"><i data-lucide="calendar" class="mks-icon-sm"></i>&nbsp;{{ page.date | date: '%m/%Y' }}</span>{% endif %}
+        {% if page.equipe %}<span class="tag is-white"><i data-lucide="users" class="mks-icon-sm"></i>&nbsp;{{ page.equipe }}</span>{% endif %}
+        {% if page.cadre %}<span class="tag is-white"><i data-lucide="graduation-cap" class="mks-icon-sm"></i>&nbsp;{{ page.cadre }}</span>{% endif %}
+        {% for t in page.tags %}<span class="tag is-white">{{ t }}</span>{% endfor %}
+      </div>
+      {% if page.liens %}
+      <div class="buttons mt-3">
+        {% for l in page.liens %}<a class="button is-small is-white" href="{{ l.url }}"><i data-lucide="{{ l.icon | default: 'external-link' }}" class="mks-icon-sm"></i><span>{{ l.label }}</span></a>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <article class="column {% if page.toc != false %}is-9{% else %}is-8 is-offset-2{% endif %}">
+        {% if page.image %}<figure class="image mb-5"><img class="mks-rounded" src="{{ page.image | relative_url }}" alt="{{ page.title }}"></figure>{% endif %}
+        <div class="content mks-content" id="mks-article">{{ content }}</div>
+        {% include competences-liees.html item=page %}
+      </article>
+      {% if page.toc != false %}<aside class="column is-3 is-hidden-touch">{% include toc.html %}</aside>{% endif %}
+    </div>
+  </div>
+</section>

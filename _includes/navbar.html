@@ -1,0 +1,24 @@
+<nav class="navbar mks-navbar" role="navigation" aria-label="Navigation principale">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item mks-brand" href="{{ '/' | relative_url }}">
+        {% if site.author.avatar %}<img class="mks-brand-avatar" src="{{ site.author.avatar | relative_url }}" alt="">{% endif %}
+        <span>{{ site.title }}</span>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mks-menu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="mks-menu" class="navbar-menu">
+      <div class="navbar-end">
+        {% for item in site.data.navigation %}
+          {% assign url = item.url | relative_url %}
+          <a class="navbar-item{% if page.url == item.url or page.url contains item.url and item.url != '/' %} is-active{% endif %}" href="{{ url }}">
+            {% if item.icon %}<i data-lucide="{{ item.icon }}" class="mks-icon"></i>{% endif %}
+            <span>{{ item.title }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</nav>

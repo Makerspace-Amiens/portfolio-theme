@@ -1,0 +1,15 @@
+{% comment %} Affiche les compétences mobilisées par un projet ou un article (front matter `competences: [C1, C3]`) {% endcomment %}
+{% assign item = include.item %}
+{% if item.competences and item.competences.size > 0 %}
+<div class="box mks-competences-liees mt-5">
+  <p class="has-text-weight-bold mb-2"><i data-lucide="target" class="mks-icon-sm"></i> Compétences mobilisées</p>
+  <div class="tags">
+    {% for cid in item.competences %}
+      {% assign c = site.data.competences.competences | where: 'id', cid | first %}
+      <a class="tag is-medium is-primary is-light" href="{{ '/competences/' | relative_url }}#{{ cid | slugify }}">
+        <strong>{{ cid }}</strong>{% if c %}&nbsp;· {{ c.nom }}{% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

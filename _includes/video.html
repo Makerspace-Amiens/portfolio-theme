@@ -1,0 +1,18 @@
+{% comment %}
+  Vidéo intégrée : YouTube (id), PeerTube/autre (url d'embed) ou fichier local (fichier)
+  {% include video.html youtube="dQw4w9WgXcQ" %}
+  {% include video.html embed="https://peertube.example/videos/embed/xxxx" %}
+  {% include video.html fichier="/assets/videos/demo.mp4" %}
+{% endcomment %}
+<figure class="mks-embed">
+  {% if include.fichier %}
+    <video controls preload="metadata" style="width:100%"><source src="{{ include.fichier | relative_url }}"></video>
+  {% else %}
+    <div class="mks-video">
+      <iframe src="{% if include.youtube %}https://www.youtube-nocookie.com/embed/{{ include.youtube }}{% else %}{{ include.embed }}{% endif %}"
+        title="{{ include.titre | default: 'Vidéo' }}" loading="lazy" allowfullscreen
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    </div>
+  {% endif %}
+  {% if include.titre %}<figcaption>{{ include.titre }}</figcaption>{% endif %}
+</figure>

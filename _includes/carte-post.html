@@ -1,0 +1,9 @@
+{% assign p = include.post %}
+<article class="box mks-post-item">
+  <p class="is-size-7 has-text-grey">
+    <i data-lucide="calendar" class="mks-icon-sm"></i> {{ p.date | date: '%d/%m/%Y' }}
+    {% for cat in p.categories %} · <span class="tag is-primary is-light">{{ cat }}</span>{% endfor %}
+  </p>
+  <h3 class="title is-5 mt-2 mb-2"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+  <p>{{ p.description | default: p.excerpt | strip_html | truncatewords: 35 }}</p>
+</article>

@@ -1,0 +1,17 @@
+{% comment %}
+  Modèle 3D interactif avec <model-viewer> — doc : https://modelviewer.dev/docs/
+  Formats : .glb (recommandé) ou .gltf. Les .stl/.step doivent être convertis (voir guide).
+  {% include modele3d.html src="/assets/modeles/piece.glb" titre="Support moteur" %}
+  Options : hauteur=400, poster="/assets/images/piece.jpg", ar=true, rotation=false
+{% endcomment %}
+<figure class="mks-embed">
+  <model-viewer src="{% if include.src contains '://' %}{{ include.src }}{% else %}{{ include.src | relative_url }}{% endif %}"
+    alt="{{ include.titre | default: 'Modèle 3D' }}"
+    camera-controls touch-action="pan-y" shadow-intensity="1"
+    {% if include.rotation != false %}auto-rotate{% endif %}
+    {% if include.ar %}ar{% endif %}
+    {% if include.poster %}poster="{% if include.poster contains '://' %}{{ include.poster }}{% else %}{{ include.poster | relative_url }}{% endif %}"{% endif %}
+    style="width:100%; height: {{ include.hauteur | default: 400 }}px; background: var(--mks-surface);">
+  </model-viewer>
+  {% if include.titre %}<figcaption>{{ include.titre }}</figcaption>{% endif %}
+</figure>

@@ -1,0 +1,72 @@
+---
+layout: default
+---
+{% assign ref = site.data.competences %}
+{% assign max = ref.niveau_max | default: 4 %}
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">{{ page.title | default: 'Mes compétences' }}</h1>
+    {% if ref.referentiel %}<p class="subtitle is-5 has-text-grey">{{ ref.referentiel }}</p>{% endif %}
+
+    <div class="columns is-vcentered">
+      <div class="column is-6">
+        <div class="box mks-radar-box">
+          <canvas id="mks-radar" aria-label="Diagramme radar des compétences" role="img"></canvas>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="content mks-content">{{ content }}</div>
+        {% if ref.niveaux %}
+        <table class="table is-narrow is-fullwidth mks-niveaux">
+          <thead><tr><th>Niveau</th><th>Signification</th></tr></thead>
+          <tbody>{% for n in ref.niveaux %}<tr><td><strong>{{ forloop.index }}</strong></td><td>{{ n }}</td></tr>{% endfor %}</tbody>
+        </table>
+        {% endif %}
+      </div>
+    </div>
+
+    {% for c in ref.competences %}
+      {% assign p_projets = site.projets | where_exp: 'p', 'p.competences contains c.id' %}
+      {% assign p_posts = site.posts | where_exp: 'p', 'p.competences contains c.id' %}
+      {% assign p_docs = site.docs | where_exp: 'p', 'p.competences contains c.id' %}
+      {% assign nb = p_projets.size | plus: p_posts.size | plus: p_docs.size | plus: c.autres_preuves.size %}
+      <div class="box mks-competence" id="{{ c.id | slugify }}">
+        <div class="columns is-vcentered is-mobile mb-0">
+          <div class="column">
+            <p class="title is-5 mb-1"><span class="tag is-primary mr-2">{{ c.id }}</span>{{ c.nom }}</p>
+            {% if c.description %}<p class="has-text-grey is-size-6">{{ c.description }}</p>{% endif %}
+          </div>
+          <div class="column is-narrow has-text-right">
+            <p class="is-size-7 has-text-grey">Niveau {{ c.niveau | default: 0 }}/{{ max }}{% if c.objectif %} · visé {{ c.objectif }}{% endif %}</p>
+            <div class="mks-niveau" aria-label="Niveau {{ c.niveau }} sur {{ max }}">
+              {% for i in (1..max) %}<span class="{% if i <= c.niveau %}is-on{% elsif c.objectif and i <= c.objectif %}is-target{% endif %}"></span>{% endfor %}
+            </div>
+          </div>
+        </div>
+
+        {% if c.justification %}<div class="content mks-content mt-3">{{ c.justification | markdownify }}</div>{% endif %}
+
+        <details class="mks-preuves" {% if nb > 0 %}open{% endif %}>
+          <summary>Preuves ({{ nb }})</summary>
+          {% if nb == 0 %}<p class="has-text-grey is-size-7 mt-2">Aucune preuve pour le moment : ajoutez <code>competences: [{{ c.id }}]</code> dans un projet ou un article.</p>{% endif %}
+          <ul>
+            {% for p in p_projets %}<li><i data-lucide="layout-grid" class="mks-icon-sm"></i> <a href="{{ p.url | relative_url }}">{{ p.title }}</a> <span class="tag is-light">projet</span></li>{% endfor %}
+            {% for p in p_posts %}<li><i data-lucide="newspaper" class="mks-icon-sm"></i> <a href="{{ p.url | relative_url }}">{{ p.title }}</a> <span class="tag is-light">article</span></li>{% endfor %}
+            {% for p in p_docs %}<li><i data-lucide="book-open" class="mks-icon-sm"></i> <a href="{{ p.url | relative_url }}">{{ p.title }}</a> <span class="tag is-light">doc</span></li>{% endfor %}
+            {% for a in c.autres_preuves %}<li><i data-lucide="{{ a.icon | default: 'award' }}" class="mks-icon-sm"></i> {% if a.lien %}<a href="{{ a.lien | relative_url }}">{{ a.titre }}</a>{% else %}<strong>{{ a.titre }}</strong>{% endif %}{% if a.description %} — {{ a.description }}{% endif %}</li>{% endfor %}
+          </ul>
+        </details>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  window.MKS_COMPETENCES = {
+    max: {{ max }},
+    labels: [{% for c in ref.competences %}{% assign court = c.court | default: c.nom %}{{ c.id | append: ' · ' | append: court | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+    ids: [{% for c in ref.competences %}{{ c.id | slugify | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+    niveau: [{% for c in ref.competences %}{{ c.niveau | default: 0 }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+    objectif: [{% for c in ref.competences %}{{ c.objectif | default: 0 }}{% unless forloop.last %},{% endunless %}{% endfor %}]
+  };
+</script>

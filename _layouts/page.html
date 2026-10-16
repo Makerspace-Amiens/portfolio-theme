@@ -1,0 +1,12 @@
+---
+layout: default
+---
+<section class="section">
+  <div class="container mks-narrow">
+    {% if page.title %}<h1 class="title is-2">{{ page.title }}</h1>{% endif %}
+    {% if page.description %}<p class="subtitle is-5 has-text-grey">{{ page.description }}</p>{% endif %}
+    <div class="content mks-content">
+      {{ content }}
+    </div>
+  </div>
+</section>

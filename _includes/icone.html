@@ -1,0 +1,4 @@
+{% comment %}
+  Icône Lucide — catalogue : https://lucide.dev/icons/
+  {% include icone.html nom="cpu" %}   {% include icone.html nom="printer" taille=32 couleur="#ef2e31" %}
+{% endcomment %}<i data-lucide="{{ include.nom }}" class="mks-icon-inline" style="{% if include.taille %}width:{{ include.taille }}px;height:{{ include.taille }}px;{% endif %}{% if include.couleur %}color:{{ include.couleur }};{% endif %}"></i>
