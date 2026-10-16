@@ -91,7 +91,14 @@ document.addEventListener('DOMContentLoaded', function () {
         type: 'radar',
         data: { labels: d.labels, datasets: datasets },
         options: {
-          scales: { r: { min: 0, max: d.max, ticks: { stepSize: 1 }, pointLabels: { font: { size: 12 } } } },
+          scales: { r: { min: 0, max: d.max, ticks: { stepSize: 1 }, pointLabels: {
+            font: { size: 12 },
+            /* « C1 · Besoin » sur deux lignes ; sur petit écran, seulement « C1 » pour ne pas couper les libellés */
+            callback: function (label) {
+              var morceaux = label.split(' · ');
+              return this.chart.width < 480 ? morceaux[0] : morceaux;
+            }
+          } } },
           plugins: { legend: { position: 'bottom' } },
           onClick: function (evt, elements) {
             if (elements.length) location.hash = d.ids[elements[0].index];
