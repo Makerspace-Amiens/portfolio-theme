@@ -1,0 +1,67 @@
+# =====================================================================
+#  SITE DE DOCUMENTATION ET DE DÉMONSTRATION DU THÈME
+#  Publié par GitHub Pages depuis la branche main (racine).
+#  Il utilise directement les _layouts, _includes et assets de ce dépôt :
+#  la démo montre donc toujours le thème tel qu'il est dans le code.
+#
+#  Rien de ce fichier, ni de _data, des pages ou de demo/, n'est transmis
+#  aux sites étudiants : un remote_theme ne fournit que _layouts,
+#  _includes, _sass et assets.
+# =====================================================================
+
+title: "Construis ton site"
+description: "Thème Jekyll du MakerSpace UniLaSalle Amiens : documentation et démonstration"
+lang: fr
+
+url: "https://makerspace-amiens.github.io"
+baseurl: "/portfolio-theme"
+
+# Profil fictif de l'élève de démonstration
+author:
+  name: "Camille Exemple"
+  avatar: "/demo/images/avatar.svg"
+  bio: "Site de démonstration du thème « Construis ton site » : chaque page montre une fonctionnalité."
+  formation: "I1 — UniLaSalle Amiens"
+  localisation: "Amiens"
+  links:
+    - label: "GitHub"
+      icon: "github"
+      url: "https://github.com/Makerspace-Amiens/portfolio-theme"
+    - label: "Documentation MakerSpace"
+      icon: "book-open"
+      url: "https://doc.makerspace-amiens.fr/"
+
+plugins:
+  - jekyll-feed
+
+# Mêmes collections et mêmes réglages que le dépôt portfolio-template
+collections:
+  projets:
+    output: true
+    permalink: /projets/:path/
+  docs:
+    output: true
+    permalink: /docs/:path/
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: projets }
+    values: { layout: projet }
+  - scope: { path: "", type: docs }
+    values: { layout: doc }
+  - scope: { path: "" }
+    values: { layout: page }
+
+permalink: /blog/:year/:month/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - vendor

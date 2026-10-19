@@ -1,0 +1,7 @@
+# Données au format Chart.js : https://www.chartjs.org/docs/latest/general/data-structures.html
+labels: ["3 V", "5 V", "7 V", "9 V", "12 V"]
+datasets:
+  - label: "Moteur A (tr/min)"
+    data: [40, 85, 120, 160, 210]
+  - label: "Moteur B (tr/min)"
+    data: [35, 80, 125, 150, 195]
