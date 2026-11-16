@@ -14,7 +14,7 @@ description: "Thème Jekyll du MakerSpace UniLaSalle Amiens : documentation et d
 lang: fr
 couleur: rouge                 # palette du thème (voir guide étudiant, partie 11)
 
-url: "https://makerspace-amiens.github.io"
+url: "https://makerspace-amiens.fr"
 baseurl: "/portfolio-theme"
 
 # Profil fictif de l'élève de démonstration

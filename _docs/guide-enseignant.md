@@ -21,7 +21,7 @@ github.com/<etudiant>/
 
 Le site étudiant ne contient **que du contenu** (Markdown + YAML). Toute l'apparence vient du thème, téléchargé par GitHub Pages à chaque construction. L'étudiant peut choisir une couleur dans `_config.yml` et, s'il le souhaite, ajouter du CSS ou remplacer un fichier du thème (partie 11 du guide étudiant) ; ce n'est jamais nécessaire. GitHub Pages en mode « Deploy from a branch » suffit : **pas de GitHub Actions personnalisée, pas de Ruby à installer** pour les étudiants.
 
-Le dépôt `portfolio-theme` est aussi un site Jekyll complet : sa racine contient, à côté des fichiers du thème, un `_config.yml`, des données (`_data`) et des pages (guides, boîte à outils, projet, articles et compétences d'exemple). GitHub Pages le publie à l'adresse <https://makerspace-amiens.github.io/portfolio-theme/>. Ce site construit avec les fichiers du thème présents à côté de lui : **la démo reflète toujours le code exact du thème**, et une même branche permet de modifier le thème, sa documentation et sa démo.
+Le dépôt `portfolio-theme` est aussi un site Jekyll complet : sa racine contient, à côté des fichiers du thème, un `_config.yml`, des données (`_data`) et des pages (guides, boîte à outils, projet, articles et compétences d'exemple). GitHub Pages le publie à l'adresse <https://makerspace-amiens.fr/portfolio-theme/>. Ce site construit avec les fichiers du thème présents à côté de lui : **la démo reflète toujours le code exact du thème**, et une même branche permet de modifier le thème, sa documentation et sa démo.
 
 Un `remote_theme` ne transmet aux sites étudiants que `_layouts`, `_includes`, `_sass` et `assets`. Le reste du dépôt (pages, `_data`, `_config.yml`, `demo/`) ne les atteint jamais. Les images de la documentation vont donc dans `demo/images/`, **jamais dans `assets/`**, sinon elles seraient copiées dans chaque site étudiant.
 
@@ -32,7 +32,7 @@ Le template, lui, reste volontairement minimal et change peu : un exemple de cha
 ### 1.1 Publier le thème
 
 1. Créer le dépôt **public** `Makerspace-Amiens/portfolio-theme` et y pousser la branche `main`.
-2. Activer Pages : *Settings → Pages → Deploy from a branch → `main` / `(root)`*. La documentation et la démo sont en ligne à <https://makerspace-amiens.github.io/portfolio-theme/>.
+2. Activer Pages : *Settings → Pages → Deploy from a branch → `main` / `(root)`*. La documentation et la démo sont en ligne à <https://makerspace-amiens.fr/portfolio-theme/>.
 3. Vérifier le site : accueil, projets, compétences (radar), blog, docs (TOC + menu), boîte à outils (graphiques, 3D, Mermaid).
 4. Créer un tag et une release :
    ```bash

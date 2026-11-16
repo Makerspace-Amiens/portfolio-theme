@@ -3,7 +3,7 @@
 Thème Jekyll distribué en `remote_theme` pour le cours **« Construis ton site »** (I1).
 Les étudiants ne forkent **pas** ce dépôt : ils utilisent le dépôt [`portfolio-template`](https://github.com/Makerspace-Amiens/portfolio-template), qui appelle ce thème.
 
-📖 **Documentation et démonstration : <https://makerspace-amiens.github.io/portfolio-theme/>**
+📖 **Documentation et démonstration : <https://makerspace-amiens.fr/portfolio-theme/>**
 
 ## Un dépôt, deux rôles
 
@@ -82,7 +82,7 @@ Toutes les bibliothèques sont chargées depuis le CDN jsDelivr (sauf KiCanvas, 
 4. Les étudiants restent sur leur version tant qu'ils ne changent pas `@vX.Y.Z` dans leur `_config.yml`.
 5. Changement cassant (renommage d'include, de champ de front matter) → version majeure (`v2.0.0`) + note de migration dans la Release.
 
-Voir le [guide enseignant](https://makerspace-amiens.github.io/portfolio-theme/docs/guide-enseignant/).
+Voir le [guide enseignant](https://makerspace-amiens.fr/portfolio-theme/docs/guide-enseignant/).
 
 ## Licence
 
