@@ -1,0 +1,76 @@
+{% comment %}
+  Usage interne (appelé par head.html) : transforme une couleur libre en variables Bulma.
+  {% include couleur-perso.html hex="#0057b8" %}   ← "#rrggbb" ou "#rgb"
+  Calcule la teinte, la saturation et la luminosité (TSL) attendues par Bulma 1.x, choisit
+  un texte blanc ou foncé pour les boutons, et assombrit la couleur des liens si besoin
+  pour qu'ils restent lisibles sur fond blanc (contraste AA, luminance approchée).
+  Une valeur invalide ne produit rien : le site garde le rouge par défaut.
+{% endcomment %}
+{%- assign mks_hex = include.hex | remove: '#' | strip | downcase -%}
+{%- if mks_hex.size == 3 -%}
+  {%- assign c0 = mks_hex | slice: 0 -%}{%- assign c1 = mks_hex | slice: 1 -%}{%- assign c2 = mks_hex | slice: 2 -%}
+  {%- assign mks_hex = c0 | append: c0 | append: c1 | append: c1 | append: c2 | append: c2 -%}
+{%- endif -%}
+{%- assign mks_chiffres = '0123456789abcdef' -%}
+{%- assign mks_valide = false -%}
+{%- if mks_hex.size == 6 -%}
+  {%- assign mks_valide = true -%}
+  {%- for i in (0..5) -%}
+    {%- assign ch = mks_hex | slice: i -%}
+    {%- unless mks_chiffres contains ch -%}{%- assign mks_valide = false -%}{%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if mks_valide -%}
+  {%- comment -%} Composantes rouge, vert, bleu (0 à 255) {%- endcomment -%}
+  {%- for i in (0..2) -%}
+    {%- assign p = i | times: 2 -%}{%- assign q = p | plus: 1 -%}
+    {%- assign fort = mks_hex | slice: p -%}{%- assign faible = mks_hex | slice: q -%}
+    {%- assign vf = mks_chiffres | split: fort | first | size -%}
+    {%- assign vb = mks_chiffres | split: faible | first | size -%}
+    {%- assign v = vf | times: 16 | plus: vb -%}
+    {%- case i -%}{%- when 0 -%}{%- assign r = v -%}{%- when 1 -%}{%- assign g = v -%}{%- else -%}{%- assign b = v -%}{%- endcase -%}
+  {%- endfor -%}
+  {%- assign vmax = r | at_least: g | at_least: b -%}
+  {%- assign vmin = r | at_most: g | at_most: b -%}
+  {%- assign somme = vmax | plus: vmin -%}
+  {%- assign delta = vmax | minus: vmin -%}
+  {%- assign lum_l = somme | times: 100.0 | divided_by: 510 | round -%}
+  {%- if delta == 0 -%}
+    {%- assign teinte = 0 -%}{%- assign sat = 0 -%}{%- assign sat_lien = 0 -%}
+  {%- else -%}
+    {%- if somme > 255 -%}{%- assign base = 510 | minus: somme -%}{%- else -%}{%- assign base = somme -%}{%- endif -%}
+    {%- assign sat = delta | times: 100.0 | divided_by: base | round -%}
+    {%- if vmax == r -%}
+      {%- assign teinte = g | minus: b | times: 60.0 | divided_by: delta -%}
+      {%- if teinte < 0 -%}{%- assign teinte = teinte | plus: 360 -%}{%- endif -%}
+    {%- elsif vmax == g -%}
+      {%- assign teinte = b | minus: r | times: 60.0 | divided_by: delta | plus: 120 -%}
+    {%- else -%}
+      {%- assign teinte = r | minus: g | times: 60.0 | divided_by: delta | plus: 240 -%}
+    {%- endif -%}
+    {%- assign teinte = teinte | round -%}
+  {%- endif -%}
+  {%- comment -%} Luminance approchée (carré au lieu de la puissance 2,2) {%- endcomment -%}
+  {%- assign lr = r | times: r | times: 0.2126 -%}
+  {%- assign lg = g | times: g | times: 0.7152 -%}
+  {%- assign lb = b | times: b | times: 0.0722 -%}
+  {%- assign luminance = lr | plus: lg | plus: lb | divided_by: 65025.0 -%}
+  {%- comment -%} Liens : on assombrit la couleur (facteur k en %) jusqu'à luminance ≤ 0,16 {%- endcomment -%}
+  {%- assign k = 100 -%}
+  {%- for essai in (0..16) -%}
+    {%- assign test = luminance | times: k | times: k | divided_by: 10000.0 -%}
+    {%- if test <= 0.16 -%}{%- break -%}{%- endif -%}
+    {%- assign k = k | minus: 5 -%}
+  {%- endfor -%}
+  {%- assign somme_lien = somme | times: k | divided_by: 100.0 -%}
+  {%- assign lum_lien = somme_lien | times: 100.0 | divided_by: 510 | round -%}
+  {%- if delta != 0 -%}
+    {%- if somme_lien > 255 -%}
+      {%- assign base_lien = 510 | minus: somme_lien -%}
+      {%- assign sat_lien = delta | times: k | divided_by: base_lien | round -%}
+    {%- else -%}
+      {%- assign sat_lien = delta | times: 100.0 | divided_by: somme | round -%}
+    {%- endif -%}
+  {%- endif -%}
+<style>:root{--mks-primary:#{{ mks_hex }};--bulma-primary-h:{{ teinte }}deg;--bulma-primary-s:{{ sat }}%;--bulma-primary-l:{{ lum_l }}%;{% if luminance < 0.19 %}--bulma-primary-invert-l:100%;{% endif %}--bulma-link-h:{{ teinte }}deg;--bulma-link-s:{{ sat_lien }}%;--bulma-link-l:{{ lum_lien }}%;--mks-primary-text:var(--bulma-link);}</style>
+{%- endif -%}

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'fr' }}" data-theme="light">
+{%- comment -%} Couleur du site : nom de la palette (rouge, bleu…) ou "#rrggbb", voir head.html {%- endcomment -%}
+{%- assign mks_couleur = site.couleur | default: site.theme_color | default: 'rouge' | strip | downcase -%}
+<html lang="{{ site.lang | default: 'fr' }}" data-theme="light" data-couleur="{% if mks_couleur contains '#' %}perso{% else %}{{ mks_couleur }}{% endif %}">
 <head>
   {% include head.html %}
 </head>

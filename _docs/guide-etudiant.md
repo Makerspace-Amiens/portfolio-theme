@@ -12,7 +12,7 @@ Il suit la même logique que l'atelier [Méthodologie de projet](https://doc.mak
 
 - Tu écris des fichiers **Markdown** (`.md`) et quelques fichiers de **données** (`.yml`).
 - **GitHub Pages** transforme automatiquement ces fichiers en site web avec **Jekyll**, à chaque modification.
-- L'apparence (couleurs, menus, cartes, radar…) vient du **thème MakerSpace**, appelé par une ligne de `_config.yml`. Tu n'as **pas** de HTML ni de CSS à écrire.
+- L'apparence (couleurs, menus, cartes, radar…) vient du **thème MakerSpace**, appelé par une ligne de `_config.yml`. Tu n'as **pas** de HTML ni de CSS à écrire (tu peux en ajouter si tu veux, voir la [partie 11](#11-personnaliser-lapparence-optionnel)).
 
 ```
 _config.yml          ← ton identité + réglages (étape 3)
@@ -52,7 +52,7 @@ Le contenu de la page, en Markdown.
    - ou un autre nom, par exemple `portfolio` → ton site sera à `https://pseudo.github.io/portfolio/`
 5. Laisse le dépôt **Public**, puis **Create repository**.
 6. Active le site : **Settings → Pages → Build and deployment → Source : Deploy from a branch**, branche **`main`**, dossier **`/ (root)`**, puis **Save**.
-7. Attends 1 à 2 minutes. L'onglet **Actions** montre la construction (rond orange = en cours, coche verte = OK, croix rouge = erreur → voir [Dépannage](#12-dépannage)).
+7. Attends 1 à 2 minutes. L'onglet **Actions** montre la construction (rond orange = en cours, coche verte = OK, croix rouge = erreur → voir [Dépannage](#13-dépannage)).
 8. L'adresse de ton site s'affiche en haut de **Settings → Pages**. Ajoute-la dans la description du dépôt (roue dentée à droite de « About »).
 
 ---
@@ -70,6 +70,7 @@ Ouvre `_config.yml` sur GitHub (icône crayon ✏️) et modifie :
 | `author.name`, `bio`, `formation`, `localisation` | Tes informations |
 | `author.avatar` | Chemin de ta photo (dépose-la dans `assets/images/`, ex. `/assets/images/photo.jpg`) |
 | `author.links` | Tes liens (GitHub, LinkedIn, mail…). Icônes au choix sur [lucide.dev/icons](https://lucide.dev/icons/) |
+| `couleur` | Optionnel : la couleur de ton site (`bleu`, `vert`, `violet`…), voir la [partie 11](#11-personnaliser-lapparence-optionnel) |
 
 ⚠️ **Ne modifie pas** les blocs `remote_theme`, `plugins`, `collections` et `defaults`, sauf consigne de l'enseignant.
 
@@ -283,7 +284,85 @@ Modifier sur GitHub suffit. Pour voir le rendu avant de publier et travailler pl
 
 ---
 
-## 11. Faire vivre ton site toute l'année
+## 11. Personnaliser l'apparence (optionnel)
+
+Tous les sites ont la même mise en page : c'est voulu, ce qui compte est **ton contenu**. Tu peux quand même donner ta couleur à ton site, en trois niveaux du plus simple au plus avancé. **Le niveau 1 suffit largement.**
+
+### Niveau 1 : choisir une couleur (`_config.yml`)
+
+Ajoute ou modifie la ligne `couleur` dans `_config.yml` :
+
+```yaml
+couleur: bleu
+```
+
+| Valeur | Couleur |
+|---|---|
+| `rouge` (par défaut) | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#ef2e31"></span> |
+| `bleu` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#2563eb"></span> |
+| `vert` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#16a34a"></span> |
+| `violet` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#7c3aed"></span> |
+| `orange` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#ea580c"></span> |
+| `turquoise` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#0d9488"></span> |
+| `rose` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#db2777"></span> |
+| `gris` | <span style="display:inline-block;width:3rem;height:1rem;border-radius:4px;background:#475569"></span> |
+
+La couleur s'applique au menu, aux boutons, aux liens, aux étiquettes, aux barres de niveau et aux graphiques. Les teintes de la palette sont réglées pour que le texte reste **lisible** (contraste suffisant pour l'accessibilité).
+
+**Couleur libre** : tu peux aussi donner un code couleur hexadécimal, **entre guillemets** (sans guillemets, YAML prend le `#` pour le début d'un commentaire) :
+
+```yaml
+couleur: "#0057b8"
+```
+
+Le thème calcule tout seul la couleur du texte des boutons (blanc ou foncé) et assombrit les liens si ta couleur est trop claire pour être lue sur fond blanc. Un code invalide est ignoré : le site reste rouge. Pour trouver un code, utilise le sélecteur de couleur de VS Code, d'Inkscape, ou cherche « color picker » en ligne.
+
+### Niveau 2 : ajouter ta feuille de style (`assets/css/perso.css`)
+
+Pour aller plus loin (police, arrondis, fonds…), crée le fichier `assets/css/perso.css` dans ton dépôt : **Add file → Create new file**, et tape `assets/css/perso.css` comme nom (les `/` créent les dossiers). Le thème détecte ce fichier et le charge **après** son propre style : tes règles l'emportent. Supprime le fichier pour revenir au style d'origine.
+
+Le plus simple et le plus sûr est de modifier les **variables** du thème :
+
+```css
+:root {
+  --mks-radius: 4px;                       /* cartes et images moins arrondies */
+  --mks-surface: #eef4fb;                  /* fond des bandeaux et des blocs */
+  --mks-dark: #12263a;                     /* fond du pied de page */
+  --bulma-family-primary: Georgia, serif;  /* police du texte */
+}
+```
+
+| Variable | Rôle | Valeur par défaut |
+|---|---|---|
+| `--mks-radius` | Arrondi des cartes, images, blocs de code | `10px` |
+| `--mks-surface` | Fond clair : bandeau d'accueil, élément actif du menu, encarts | `#f5f6f8` |
+| `--mks-dark` | Fond du pied de page | `#1f2a37` |
+| `--bulma-family-primary` | Police du texte | police du système |
+
+Pour la **couleur principale**, passe par `couleur` (niveau 1) plutôt que par le CSS : elle règle d'un coup le thème, Bulma et les graphiques.
+
+Tu peux aussi viser un élément précis par sa classe. Pour trouver le nom d'une classe, fais un clic droit sur l'élément → **Inspecter**. Les classes du thème commencent par `mks-` :
+
+```css
+/* Cartes de projet avec une bordure au lieu d'une ombre */
+.mks-card { box-shadow: none; border: 1px solid #d1d5db; }
+```
+
+Les variables sont stables d'une version du thème à l'autre ; les noms de classes peuvent changer lors d'une version majeure. Après un commit, recharge la page avec **Ctrl+F5** : le navigateur garde l'ancien CSS en mémoire.
+
+### Niveau 3 : remplacer un morceau du thème (avancé)
+
+Jekyll utilise en priorité les fichiers de ton dépôt : un fichier `_includes/footer.html` ou `_layouts/projet.html` dans ton dépôt **remplace** celui du thème.
+
+1. Ouvre le fichier d'origine dans le [dépôt du thème](https://github.com/Makerspace-Amiens/portfolio-theme), dans `_layouts/` ou `_includes/`. Choisis la version (le *tag*) écrite dans ton `remote_theme`.
+2. Copie son contenu dans un fichier **de même nom, au même endroit** dans ton dépôt.
+3. Modifie ta copie.
+
+⚠️ **Un fichier copié ne reçoit plus les mises à jour du thème** : les corrections et nouveautés de ce fichier ne t'arriveront plus, et une nouvelle version du thème peut ne plus fonctionner avec ta copie. Ne copie que le fichier dont tu as besoin, demande conseil à ton enseignant avant, et supprime ta copie pour revenir au fichier du thème.
+
+---
+
+## 12. Faire vivre ton site toute l'année
 
 | Moment | Ce que tu fais |
 |---|---|
@@ -305,7 +384,7 @@ Modifier sur GitHub suffit. Pour voir le rendu avant de publier et travailler pl
 
 ---
 
-## 12. Dépannage
+## 13. Dépannage
 
 | Symptôme | Cause probable | Solution |
 |---|---|---|
@@ -318,6 +397,8 @@ Modifier sur GitHub suffit. Pour voir le rendu avant de publier et travailler pl
 | Le modèle 3D ne s'affiche pas | Fichier STL/STEP ou trop lourd | Convertir en `.glb`, alléger |
 | Le KiCad ne s'affiche pas | Ancien format (KiCad 5) | Ouvrir et réenregistrer dans KiCad 6+ |
 | Mes modifications ne se voient pas | Construction en cours ou cache | Attendre la coche verte, puis **Ctrl+F5** |
+| Ma couleur ne s'applique pas | Nom mal écrit, ou code `#` sans guillemets | `couleur: bleu`, ou `couleur: "#0057b8"` avec les guillemets |
+| `perso.css` n'a aucun effet | Fichier mal placé ou ancien CSS en cache | Chemin exact `assets/css/perso.css`, puis **Ctrl+F5** |
 | Caractères `:` dans un titre cassent tout | YAML interprète `:` | Mettre le titre entre guillemets : `title: "Robot : version 2"` |
 
 Toujours bloqué·e ? Ouvre une *issue* sur ton dépôt avec une capture d'écran de l'erreur, et préviens l'équipe MakerSpace.

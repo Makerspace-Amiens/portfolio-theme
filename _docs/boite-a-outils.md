@@ -70,6 +70,17 @@ void loop() {
 }
 ```
 
+## Couleur du site
+
+Pas d'include ici : la couleur se règle pour tout le site, d'une ligne dans `_config.yml`.
+
+```yaml
+couleur: bleu          # rouge, bleu, vert, violet, orange, turquoise, rose, gris
+couleur: "#0057b8"     # ou un code libre, entre guillemets
+```
+
+Palette complète, feuille de style personnelle (`assets/css/perso.css`) et remplacement d'un morceau du thème : voir la [partie 11 du guide étudiant]({{ '/docs/guide-etudiant/' | relative_url }}#11-personnaliser-lapparence-optionnel).
+
 ## Tableaux
 
 | Composant | Quantité | Prix |

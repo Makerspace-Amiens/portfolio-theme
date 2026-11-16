@@ -14,7 +14,26 @@
   --bulma-link-s: 70%;
   --bulma-link-l: 45%;
   --bulma-family-primary: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mks-primary-text: var(--mks-primary);   /* couleur principale utilisée comme texte sur fond clair */
 }
+
+/* Palette proposée aux étudiants : `couleur: bleu` dans _config.yml (attribut data-couleur sur <html>).
+   Chaque teinte règle Bulma (h/s/l), la couleur des liens (contraste AA sur fond blanc)
+   et le texte des boutons (--bulma-primary-invert-l : 100% = blanc, sinon foncé par défaut). */
+html[data-couleur="bleu"]      { --mks-primary: #2563eb; --bulma-primary-h: 221deg; --bulma-primary-s: 83%; --bulma-primary-l: 53%; --bulma-primary-invert-l: 100%;
+                                 --bulma-link-h: 224deg; --bulma-link-s: 76%; --bulma-link-l: 48%; --mks-primary-text: var(--bulma-link); }
+html[data-couleur="vert"]      { --mks-primary: #16a34a; --bulma-primary-h: 142deg; --bulma-primary-s: 76%; --bulma-primary-l: 36%;
+                                 --bulma-link-h: 142deg; --bulma-link-s: 72%; --bulma-link-l: 29%; --mks-primary-text: var(--bulma-link); }
+html[data-couleur="violet"]    { --mks-primary: #7c3aed; --bulma-primary-h: 262deg; --bulma-primary-s: 83%; --bulma-primary-l: 58%; --bulma-primary-invert-l: 100%;
+                                 --bulma-link-h: 263deg; --bulma-link-s: 70%; --bulma-link-l: 50%; --mks-primary-text: var(--bulma-link); }
+html[data-couleur="orange"]    { --mks-primary: #ea580c; --bulma-primary-h: 21deg; --bulma-primary-s: 90%; --bulma-primary-l: 48%;
+                                 --bulma-link-h: 17deg; --bulma-link-s: 88%; --bulma-link-l: 40%; --mks-primary-text: var(--bulma-link); }
+html[data-couleur="turquoise"] { --mks-primary: #0d9488; --bulma-primary-h: 175deg; --bulma-primary-s: 84%; --bulma-primary-l: 32%;
+                                 --bulma-link-h: 175deg; --bulma-link-s: 77%; --bulma-link-l: 26%; --mks-primary-text: var(--bulma-link); }
+html[data-couleur="rose"]      { --mks-primary: #db2777; --bulma-primary-h: 333deg; --bulma-primary-s: 71%; --bulma-primary-l: 51%; --bulma-primary-invert-l: 100%;
+                                 --bulma-link-h: 335deg; --bulma-link-s: 78%; --bulma-link-l: 42%; --mks-primary-text: var(--bulma-link); }
+html[data-couleur="gris"]      { --mks-primary: #475569; --bulma-primary-h: 215deg; --bulma-primary-s: 19%; --bulma-primary-l: 35%; --bulma-primary-invert-l: 100%;
+                                 --bulma-link-h: 215deg; --bulma-link-s: 25%; --bulma-link-l: 27%; --mks-primary-text: var(--bulma-link); }
 
 html, body { background: #fff; }
 body { display: flex; flex-direction: column; min-height: 100vh; }
@@ -26,7 +45,7 @@ main { flex: 1; }
 .mks-brand-avatar { border-radius: 50%; max-height: 2rem !important; }
 /* Bulma 1 colore le fond de l'élément actif : on garde un fond neutre et un soulignement */
 .mks-navbar .navbar-item.is-active,
-.mks-navbar .navbar-item.is-active:hover { background-color: var(--mks-surface); color: var(--mks-primary); font-weight: 600;
+.mks-navbar .navbar-item.is-active:hover { background-color: var(--mks-surface); color: var(--mks-primary-text); font-weight: 600;
   box-shadow: inset 0 -3px 0 var(--mks-primary); }
 .navbar-item .mks-icon { margin-right: .35rem; }
 
@@ -72,7 +91,7 @@ main { flex: 1; }
 .mks-toc-title { font-weight: 700; text-transform: uppercase; font-size: .75rem; letter-spacing: .05em; color: #6b7280; margin-bottom: .5rem; }
 .mks-toc-list { border-left: 2px solid #e5e7eb; }
 .mks-toc-list a { display: block; padding: .2rem .75rem; color: #4b5563; margin-left: -2px; border-left: 2px solid transparent; }
-.mks-toc-list a:hover, .mks-toc-list a.is-active { color: var(--mks-primary); border-left-color: var(--mks-primary); }
+.mks-toc-list a:hover, .mks-toc-list a.is-active { color: var(--mks-primary-text); border-left-color: var(--mks-primary); }
 .mks-toc-list .toc-h3 a { padding-left: 1.5rem; font-size: .85rem; }
 .mks-doc-nav { border-right: 1px solid #e5e7eb; }
 .mks-doc-nav .menu-list a.is-active { background: var(--mks-primary); color: #fff; }
@@ -81,7 +100,7 @@ main { flex: 1; }
 /* About / CV */
 .mks-social { display: flex; gap: .75rem; justify-content: center; }
 .mks-social a { color: #4b5563; }
-.mks-social a:hover { color: var(--mks-primary); }
+.mks-social a:hover { color: var(--mks-primary-text); }
 .mks-timeline { border-left: 2px solid #e5e7eb; margin-left: .5rem; }
 .mks-timeline-item { position: relative; padding: 0 0 1.5rem 1.5rem; }
 .mks-timeline-item::before { content: ""; position: absolute; left: -7px; top: .3rem; width: 12px; height: 12px; border-radius: 50%; background: var(--mks-primary); border: 2px solid #fff; }
@@ -89,11 +108,11 @@ main { flex: 1; }
 /* Compétences */
 .mks-radar-box { padding: 1rem; }
 .mks-competence { scroll-margin-top: 1rem; border-left: 4px solid var(--mks-primary); }
-.mks-competence:target { box-shadow: 0 0 0 3px rgba(239,46,49,.35); }
+.mks-competence:target { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mks-primary) 35%, transparent); }
 .mks-niveau { display: inline-flex; gap: 4px; }
 .mks-niveau span { width: 22px; height: 8px; border-radius: 4px; background: #e5e7eb; }
 .mks-niveau span.is-on { background: var(--mks-primary); }
-.mks-niveau span.is-target { background: repeating-linear-gradient(45deg, #fca5a5, #fca5a5 3px, #fee2e2 3px, #fee2e2 6px); }
+.mks-niveau span.is-target { background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--mks-primary) 45%, #fff), color-mix(in srgb, var(--mks-primary) 45%, #fff) 3px, color-mix(in srgb, var(--mks-primary) 15%, #fff) 3px, color-mix(in srgb, var(--mks-primary) 15%, #fff) 6px); }
 .mks-preuves summary { cursor: pointer; font-weight: 600; color: #374151; margin-top: .5rem; }
 .mks-preuves ul { list-style: none; margin: .5rem 0 0; }
 .mks-preuves li { padding: .2rem 0; }

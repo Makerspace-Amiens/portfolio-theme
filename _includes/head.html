@@ -2,11 +2,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
 <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | truncate: 160 }}">
-<meta name="theme-color" content="#ef2e31">
+{%- case mks_couleur -%}
+  {%- when 'bleu' -%}{%- assign mks_hex_nav = '#2563eb' -%}
+  {%- when 'vert' -%}{%- assign mks_hex_nav = '#16a34a' -%}
+  {%- when 'violet' -%}{%- assign mks_hex_nav = '#7c3aed' -%}
+  {%- when 'orange' -%}{%- assign mks_hex_nav = '#ea580c' -%}
+  {%- when 'turquoise' -%}{%- assign mks_hex_nav = '#0d9488' -%}
+  {%- when 'rose' -%}{%- assign mks_hex_nav = '#db2777' -%}
+  {%- when 'gris' -%}{%- assign mks_hex_nav = '#475569' -%}
+  {%- else -%}{%- assign mks_hex_nav = '#ef2e31' -%}
+{%- endcase -%}
+{%- if mks_couleur contains '#' -%}
+  {%- capture mks_style_perso %}{% include couleur-perso.html hex=mks_couleur %}{% endcapture -%}
+  {%- if mks_style_perso contains '<style>' -%}{%- assign mks_hex_nav = mks_couleur -%}{%- endif -%}
+{%- endif %}
+<meta name="theme-color" content="{{ mks_hex_nav }}">
 {% if page.header_image %}<meta property="og:image" content="{{ page.header_image | absolute_url }}">{% endif %}
 <link rel="icon" href="{{ site.favicon | default: '/assets/images/favicon.svg' | relative_url }}">
 <!-- Bulma (MIT) — https://bulma.io/documentation/ -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-{% if site.theme_color %}<style>:root{--mks-primary: {{ site.theme_color }};}</style>{% endif %}
+{{ mks_style_perso }}
+{%- comment -%} Feuille de style personnelle de l'étudiant, chargée seulement si le fichier existe {%- endcomment -%}
+{%- assign mks_perso = site.static_files | where: 'path', '/assets/css/perso.css' | first -%}
+{%- if mks_perso %}
+<link rel="stylesheet" href="{{ '/assets/css/perso.css' | relative_url }}">{% endif %}
 {% feed_meta %}

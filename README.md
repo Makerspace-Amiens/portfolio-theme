@@ -29,6 +29,16 @@ plugins:
   - jekyll-feed
 ```
 
+## Personnalisation (côté site étudiant)
+
+| Niveau | Comment | Effet |
+|---|---|---|
+| 1. Couleur | `couleur: bleu` dans `_config.yml` (`rouge` par défaut, `bleu`, `vert`, `violet`, `orange`, `turquoise`, `rose`, `gris`) ou un code libre `couleur: "#0057b8"` | Règle la couleur du thème, de Bulma (boutons, liens, étiquettes) et des graphiques, avec un contraste lisible |
+| 2. CSS | Fichier `assets/css/perso.css` dans le dépôt de l'étudiant | Chargé automatiquement après `theme.css` s'il existe. Variables documentées : `--mks-radius`, `--mks-surface`, `--mks-dark`, `--bulma-family-primary` |
+| 3. Remplacement | Copier un fichier de `_layouts/` ou `_includes/` dans le dépôt de l'étudiant | Remplace celui du thème, mais ne reçoit plus ses mises à jour |
+
+L'ancienne option `theme_color` reste acceptée (même effet qu'une couleur libre). Détails pour les étudiants : partie 11 du guide étudiant.
+
 ## Contenu du thème
 
 | Élément | Rôle |
@@ -48,6 +58,7 @@ plugins:
 | `_includes/encadre.html` | Encadré info / astuce / attention |
 | `_includes/video.html` | Vidéo YouTube (nocookie), PeerTube ou fichier |
 | `_includes/toc.html` | Table des matières (générée en JS depuis les h2/h3) |
+| `_includes/couleur-perso.html` | Usage interne : convertit une couleur libre (`couleur: "#rrggbb"`) en variables Bulma |
 
 ## Outils open source utilisés
 

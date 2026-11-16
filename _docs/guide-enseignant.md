@@ -19,7 +19,7 @@ github.com/<etudiant>/
 └── <etudiant>.github.io ← créé depuis le template, appelle le thème via remote_theme
 ```
 
-Le site étudiant ne contient **que du contenu** (Markdown + YAML). Toute l'apparence vient du thème, téléchargé par GitHub Pages à chaque construction. GitHub Pages en mode « Deploy from a branch » suffit : **pas de GitHub Actions personnalisée, pas de Ruby à installer** pour les étudiants.
+Le site étudiant ne contient **que du contenu** (Markdown + YAML). Toute l'apparence vient du thème, téléchargé par GitHub Pages à chaque construction. L'étudiant peut choisir une couleur dans `_config.yml` et, s'il le souhaite, ajouter du CSS ou remplacer un fichier du thème (partie 11 du guide étudiant) ; ce n'est jamais nécessaire. GitHub Pages en mode « Deploy from a branch » suffit : **pas de GitHub Actions personnalisée, pas de Ruby à installer** pour les étudiants.
 
 Le dépôt `portfolio-theme` est aussi un site Jekyll complet : sa racine contient, à côté des fichiers du thème, un `_config.yml`, des données (`_data`) et des pages (guides, boîte à outils, projet, articles et compétences d'exemple). GitHub Pages le publie à l'adresse <https://makerspace-amiens.github.io/portfolio-theme/>. Ce site construit avec les fichiers du thème présents à côté de lui : **la démo reflète toujours le code exact du thème**, et une même branche permet de modifier le thème, sa documentation et sa démo.
 
@@ -140,6 +140,18 @@ Créer `_includes/ma-brique.html`, documenter son usage en commentaire en tête 
 | `cv.yml` | Sections de CV, langues, outils, intérêts, PDF |
 | `navigation.yml` | Menu du haut |
 | `*.yml` libres | Données de graphiques (`donnees="nom"`) |
+
+### Personnalisation (contrat avec les sites étudiants)
+
+Comme les champs de données, ces points ne se renomment pas sans version majeure :
+
+- l'option `couleur` de `_config.yml` et les noms de la palette (`rouge`, `bleu`, `vert`, `violet`, `orange`, `turquoise`, `rose`, `gris`), ainsi que l'ancienne option `theme_color` ;
+- le chemin `assets/css/perso.css`, chargé après `theme.css` s'il existe dans le dépôt de l'étudiant ;
+- les variables CSS documentées : `--mks-primary`, `--mks-primary-text`, `--mks-surface`, `--mks-dark`, `--mks-radius`.
+
+Pour ajouter une teinte à la palette : un bloc `html[data-couleur="…"]` dans `assets/css/theme.css` (vérifier les contrastes : liens ≥ 4,5:1 sur fond blanc, texte des boutons blanc ou foncé selon la teinte), une ligne dans le `case` de `_includes/head.html` (couleur de la barre du navigateur mobile), puis la mettre à jour dans la partie 11 du guide étudiant, le README et le commentaire de `couleur` dans le `_config.yml` du template.
+
+Les étudiants qui remplacent un layout ou un include (niveau 3) ne reçoivent plus les corrections de ce fichier : en cas de bug signalé après une mise à jour du thème, demander d'abord s'ils ont des fichiers dans `_layouts/` ou `_includes/`.
 
 ## 5. Outils open source intégrés
 
