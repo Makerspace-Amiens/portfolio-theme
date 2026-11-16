@@ -261,7 +261,7 @@ Une bonne justification répond à trois questions :
 3. **Qu'est-ce que ça montre ?** Le lien avec le niveau visé, et ce qu'il te reste à travailler.
 
 ❌ « Je sais faire de la CAO. »
-✅ « J'ai conçu seul le châssis du robot dans Fusion 360 (3 itérations, voir le projet). Je maîtrise les esquisses contraintes et les assemblages ; je dois progresser sur la mise en plan. »
+✅ « J'ai conçu seul le châssis du robot dans Onshape (3 itérations, voir le projet). Je maîtrise les esquisses contraintes et les assemblages ; je dois progresser sur la mise en plan. »
 
 **Sois honnête** : un niveau 1 bien justifié vaut mieux qu'un niveau 4 sans preuve. Le radar doit **progresser** au fil de l'année, c'est ça qu'on regarde.
 

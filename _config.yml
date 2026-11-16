@@ -18,7 +18,7 @@ baseurl: "/portfolio-theme"
 
 # Profil fictif de l'élève de démonstration
 author:
-  name: "Camille Exemple"
+  name: "Prénom Nom"
   avatar: "/demo/images/avatar.svg"
   bio: "Site de démonstration du thème « Construis ton site » : chaque page montre une fonctionnalité."
   formation: "I1 — UniLaSalle Amiens"

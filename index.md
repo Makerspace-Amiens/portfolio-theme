@@ -14,4 +14,4 @@ Tout ce que tu vois ici (cartes de projets, radar de compétences, blog, docs av
 - 🧰 **Enrichir tes pages** : graphiques, modèles 3D, schémas KiCad, diagrammes… dans la [boîte à outils]({{ '/docs/boite-a-outils/' | relative_url }}).
 - 🎓 **Équipe pédagogique** : mise en place et maintenance dans le [guide enseignant]({{ '/docs/guide-enseignant/' | relative_url }}).
 
-Le profil, le projet, les articles et les compétences de ce site appartiennent à **Camille Exemple**, une élève fictive : ils montrent à quoi ressemble un portfolio bien rempli.
+Le profil, le projet, les articles et les compétences de ce site appartiennent à **Prénom Nom**, un profil fictif : ils montrent à quoi ressemble un portfolio bien rempli.

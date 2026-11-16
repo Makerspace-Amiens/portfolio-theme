@@ -15,9 +15,10 @@ sections:
         organisme: "UniLaSalle Amiens"
         lieu: "Amiens"
         description: "Projets au MakerSpace, robotique, prototypage rapide."
-      - periode: "2024 — 2026"
-        titre: "Classe préparatoire / BUT / Bachelor…"
-        organisme: "Établissement"
+      - periode: "2023 — 2026"
+        titre: "Baccalauréat général"
+        organisme: "Lycée"
+        description: "Spécialités mathématiques et physique-chimie."
 
   - titre: "Expériences"
     icon: briefcase
@@ -42,5 +43,5 @@ langues:
   - langue: "Anglais"
     niveau: "B2"
 
-outils: ["Fusion 360", "KiCad", "Arduino / ESP32", "Python", "Git & GitHub"]
+outils: ["Onshape", "KiCad", "Arduino / ESP32", "Python", "Git & GitHub"]
 interets: ["Robotique", "Impression 3D", "Escalade"]
