@@ -1,11 +1,8 @@
----
-title: "Guide enseignant"
-description: "Mise en place du dispositif, déroulé pédagogique et maintenance du thème."
-section: "Guides"
-nav_order: 2
----
+# Maintenance du thème
 
-Ce guide décrit la mise en place du dispositif **« Construis ton site »** par l'équipe MakerSpace, puis son suivi au fil de l'année.
+Ce document s'adresse à l'équipe qui maintient le thème **« Construis ton site »** : architecture, publication, évolution du thème et contrat de données avec les sites étudiants. Il n'est pas publié sur le site de documentation (exclu dans `_config.yml`).
+
+Le déroulé pédagogique et l'animation des séances sont dans l'atelier [Portfolio de l'ingénieur](https://doc.makerspace-amiens.fr/workshops/portfolio-ingenieur/) du site du MakerSpace.
 
 ## Architecture
 
@@ -27,7 +24,9 @@ Un `remote_theme` ne transmet aux sites étudiants que `_layouts`, `_includes`, 
 
 Le template, lui, reste volontairement minimal et change peu : un exemple de chaque type de contenu et un lien vers ce site.
 
-## 1. Mise en place initiale (une fois)
+## 1. Mise en place initiale (faite le 2026-11-16)
+
+À refaire seulement si les dépôts sont recréés.
 
 ### 1.1 Publier le thème
 
@@ -55,26 +54,7 @@ Le positionnement sur un référentiel de compétences (radar, niveaux, justific
 - L'état complet (données d'exemple, page, partie du guide étudiant, champs `competences:` des exemples) est conservé dans la branche `archive/competences` des deux dépôts.
 - Pour le réactiver : repartir de cette branche, remplacer le référentiel d'exemple par le référentiel officiel (ids stables, libellés courts de moins de 20 caractères, 8 à 10 compétences au plus pour un radar lisible), puis remettre la page, la partie du guide et les exemples.
 
-### 1.4 Ajouter le parcours au site de doc
-
-Créer un atelier sur doc.makerspace-amiens.fr, sur le modèle de *Méthodologie de projet*, qui reprend les parties du [guide étudiant]({{ '/docs/guide-etudiant/' | relative_url }}) sous forme de tutoriels (1 partie ≈ 1 tutoriel). Les tutoriels 1, 2, 4, 7 et 8 de *Méthodologie de projet* peuvent être réutilisés tels quels (création de repo, Git, Markdown, édition GitHub, build local).
-
-## 2. Déroulé pédagogique suggéré
-
-| Séance | Contenu | Livrable |
-|---|---|---|
-| 1 | Pourquoi un portfolio ? Démo du [site exemple]({{ '/' | relative_url }}). Création du site, activation Pages, identité | URL du site déposée sur Moodle |
-| 2 | Markdown, « Qui suis-je », CV. Premier article | Page about + CV |
-| 3 | La démarche compétence : en préparation (voir 1.3) | À définir |
-| 4 | Documenter un projet : page projet, médias (graphiques, 3D, KiCad, Mermaid) | 1 projet complet |
-| 5 | Docs et journal de bord, liens avec les projets en cours | 1 doc + 2 entrées de journal |
-| Suivi | Mise à jour au fil des projets de l'année | Projets et journal à jour avant chaque évaluation |
-
-**Évaluation possible** : rôle personnel et recul dans les pages projet, régularité du journal de bord, qualité rédactionnelle et respect de la propriété intellectuelle. L'esthétique n'est pas un critère : le thème est commun.
-
-**Collecter les URL** : un formulaire ou une feuille partagée (Nom, promo, URL du site, URL du dépôt). L'historique des commits GitHub permet de vérifier la régularité du travail.
-
-## 3. Maintenance du thème
+## 2. Maintenance du thème
 
 ### Faire évoluer le thème
 
@@ -108,7 +88,7 @@ Les versions de Bulma, Lucide, Chart.js, model-viewer et Mermaid sont figées da
 
 Créer `_includes/ma-brique.html`, documenter son usage en commentaire en tête du fichier, ajouter un exemple dans `_docs/boite-a-outils.md` (dans ce dépôt) et une ligne dans le tableau de la partie 6 du guide étudiant. Si la brique a besoin d'un script externe, l'ajouter dans `default.html` sous condition (`{% raw %}{% if content contains '...' %}{% endraw %}`) pour ne pas alourdir les autres pages.
 
-## 4. Structure des données (référence)
+## 3. Structure des données (référence)
 
 ### Front matter — projet (`_projets/*.md`)
 
@@ -151,7 +131,7 @@ Pour ajouter une teinte à la palette : un bloc `html[data-couleur="…"]` dans 
 
 Les étudiants qui remplacent un layout ou un include (niveau 3) ne reçoivent plus les corrections de ce fichier : en cas de bug signalé après une mise à jour du thème, demander d'abord s'ils ont des fichiers dans `_layouts/` ou `_includes/`.
 
-## 5. Outils open source intégrés
+## 4. Outils open source intégrés
 
 | Outil | Licence | Rôle dans le thème | Documentation |
 |---|---|---|---|
@@ -168,7 +148,7 @@ Les étudiants qui remplacent un layout ou un include (niveau 3) ne reçoivent p
 
 Seul l'hébergement (GitHub) n'est pas libre. Le site étant du Jekyll standard, il peut être migré vers GitLab Pages, Codeberg Pages ou un serveur de l'école si besoin (il faudra alors installer le thème via `jekyll-remote-theme` dans le pipeline de build).
 
-## 6. Points de vigilance
+## 5. Points de vigilance
 
 - **RGPD / image** : rappeler que le site est public. Un étudiant peut ne pas mettre de photo, utiliser un pseudo, ou passer son dépôt en privé en fin de formation (GitHub Pages sur dépôt privé nécessite un compte payant ou GitHub Education, que les étudiants peuvent obtenir gratuitement).
 - **Confidentialité** : pas de documents d'entreprise de stage sans accord.

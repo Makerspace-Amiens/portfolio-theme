@@ -62,6 +62,7 @@ kramdown:
 
 exclude:
   - README.md
+  - MAINTENANCE.md
   - LICENSE
   - Gemfile
   - Gemfile.lock

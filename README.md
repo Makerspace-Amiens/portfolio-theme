@@ -13,9 +13,10 @@ Ce dépôt contient le **thème** et, à côté, le **site de documentation et d
 |---|---|---|
 | `_layouts/`, `_includes/`, `assets/` | Le thème | ✅ oui, via `remote_theme` |
 | `_config.yml`, `_data/`, pages `.md` | Site de doc et de démo | ❌ non |
-| `_docs/` | Guides étudiant et enseignant, boîte à outils | ❌ non |
+| `_docs/` | Guide étudiant, boîte à outils | ❌ non |
 | `_projets/`, `_posts/` | Contenus d'exemple de la démo | ❌ non |
 | `demo/images/` | Images de la démo et de la doc (**jamais dans `assets/`**) | ❌ non |
+| `README.md`, `MAINTENANCE.md` | Documentation de l'équipe qui maintient le thème (lue sur GitHub, pas publiée sur le site) | ❌ non |
 
 La démo est construite avec les fichiers du thème présents dans le dépôt : elle montre toujours le code exact, et une même branche permet de modifier le thème, sa doc et sa démo.
 
@@ -82,7 +83,7 @@ Toutes les bibliothèques sont chargées depuis le CDN jsDelivr (sauf KiCanvas, 
 4. Les étudiants restent sur leur version tant qu'ils ne changent pas `@vAA.MM.JJ-NN` dans leur `_config.yml`.
 5. Changement cassant (renommage d'include, de champ de front matter) → la Release commence par **Migration nécessaire** et décrit la migration.
 
-Voir le [guide enseignant](https://makerspace-amiens.fr/portfolio-theme/docs/guide-enseignant/).
+Détails (architecture, versionnage, structure des données, points de vigilance) : [MAINTENANCE.md](MAINTENANCE.md).
 
 ## Licence
 
