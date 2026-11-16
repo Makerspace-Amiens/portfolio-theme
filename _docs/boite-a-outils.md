@@ -79,7 +79,7 @@ couleur: bleu          # rouge, bleu, vert, violet, orange, turquoise, rose, gri
 couleur: "#0057b8"     # ou un code libre, entre guillemets
 ```
 
-Palette complète, feuille de style personnelle (`assets/css/perso.css`) et remplacement d'un morceau du thème : voir la [partie 11 du guide étudiant]({{ '/docs/guide-etudiant/' | relative_url }}#11-personnaliser-lapparence-optionnel).
+Palette complète, feuille de style personnelle (`assets/css/perso.css`) et remplacement d'un morceau du thème : voir la [partie 10 du guide étudiant]({{ '/docs/guide-etudiant/' | relative_url }}#10-personnaliser-lapparence-optionnel).
 
 ## Tableaux
 

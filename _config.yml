@@ -12,7 +12,7 @@
 title: "Construis ton site"
 description: "Thème Jekyll du MakerSpace UniLaSalle Amiens : documentation et démonstration"
 lang: fr
-couleur: rouge                 # palette du thème (voir guide étudiant, partie 11)
+couleur: rouge                 # palette du thème (voir guide étudiant, partie 10)
 
 url: "https://makerspace-amiens.fr"
 baseurl: "/portfolio-theme"

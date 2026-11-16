@@ -23,7 +23,7 @@ La démo est construite avec les fichiers du thème présents dans le dépôt : 
 
 ```yaml
 # _config.yml
-remote_theme: Makerspace-Amiens/portfolio-theme@v1.0.0
+remote_theme: Makerspace-Amiens/portfolio-theme@v1.1.0
 plugins:
   - jekyll-remote-theme
   - jekyll-feed
@@ -37,7 +37,7 @@ plugins:
 | 2. CSS | Fichier `assets/css/perso.css` dans le dépôt de l'étudiant | Chargé automatiquement après `theme.css` s'il existe. Variables documentées : `--mks-radius`, `--mks-surface`, `--mks-dark`, `--bulma-family-primary` |
 | 3. Remplacement | Copier un fichier de `_layouts/` ou `_includes/` dans le dépôt de l'étudiant | Remplace celui du thème, mais ne reçoit plus ses mises à jour |
 
-L'ancienne option `theme_color` reste acceptée (même effet qu'une couleur libre). Détails pour les étudiants : partie 11 du guide étudiant.
+L'ancienne option `theme_color` reste acceptée (même effet qu'une couleur libre). Détails pour les étudiants : partie 10 du guide étudiant.
 
 ## Contenu du thème
 
@@ -49,7 +49,7 @@ L'ancienne option `theme_color` reste acceptée (même effet qu'une couleur libr
 | `_layouts/projets.html` / `projet.html` | Grille de cartes filtrable / page projet avec TOC |
 | `_layouts/blog.html` / `post.html` | Liste des news / article |
 | `_layouts/doc.html` | Documentation : menu latéral + contenu + TOC |
-| `_layouts/competences.html` | Radar des compétences + justifications + preuves automatiques |
+| `_layouts/competences.html` | Radar des compétences + justifications + preuves automatiques (en attente : n'apparaît que si le site a un `_data/competences.yml`, ce que le template n'a plus) |
 | `_layouts/page.html` | Page simple |
 | `_includes/chart.html` | Graphique Chart.js |
 | `_includes/kicanvas.html` | Schéma / PCB KiCad interactif |
@@ -67,7 +67,7 @@ L'ancienne option `theme_color` reste acceptée (même effet qu'une couleur libr
 | [Jekyll](https://jekyllrb.com/) | MIT | Générateur de site statique | https://jekyllrb.com/docs/ |
 | [Bulma](https://bulma.io/) | MIT | Framework CSS | https://bulma.io/documentation/ |
 | [Lucide](https://lucide.dev/) | ISC | Icônes | https://lucide.dev/icons/ |
-| [Chart.js](https://www.chartjs.org/) | MIT | Graphiques + radar compétences | https://www.chartjs.org/docs/latest/ |
+| [Chart.js](https://www.chartjs.org/) | MIT | Graphiques (et radar des compétences, en attente) | https://www.chartjs.org/docs/latest/ |
 | [KiCanvas](https://kicanvas.org/) | MIT | Visualisation KiCad dans le navigateur | https://github.com/theacodes/kicanvas |
 | [model-viewer](https://modelviewer.dev/) | Apache 2.0 | Modèles 3D glTF/GLB | https://modelviewer.dev/docs/ |
 | [Mermaid](https://mermaid.js.org/) | MIT | Diagrammes en texte | https://mermaid.js.org/intro/ |

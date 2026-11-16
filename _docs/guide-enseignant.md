@@ -19,9 +19,9 @@ github.com/<etudiant>/
 └── <etudiant>.github.io ← créé depuis le template, appelle le thème via remote_theme
 ```
 
-Le site étudiant ne contient **que du contenu** (Markdown + YAML). Toute l'apparence vient du thème, téléchargé par GitHub Pages à chaque construction. L'étudiant peut choisir une couleur dans `_config.yml` et, s'il le souhaite, ajouter du CSS ou remplacer un fichier du thème (partie 11 du guide étudiant) ; ce n'est jamais nécessaire. GitHub Pages en mode « Deploy from a branch » suffit : **pas de GitHub Actions personnalisée, pas de Ruby à installer** pour les étudiants.
+Le site étudiant ne contient **que du contenu** (Markdown + YAML). Toute l'apparence vient du thème, téléchargé par GitHub Pages à chaque construction. L'étudiant peut choisir une couleur dans `_config.yml` et, s'il le souhaite, ajouter du CSS ou remplacer un fichier du thème (partie 10 du guide étudiant) ; ce n'est jamais nécessaire. GitHub Pages en mode « Deploy from a branch » suffit : **pas de GitHub Actions personnalisée, pas de Ruby à installer** pour les étudiants.
 
-Le dépôt `portfolio-theme` est aussi un site Jekyll complet : sa racine contient, à côté des fichiers du thème, un `_config.yml`, des données (`_data`) et des pages (guides, boîte à outils, projet, articles et compétences d'exemple). GitHub Pages le publie à l'adresse <https://makerspace-amiens.fr/portfolio-theme/>. Ce site construit avec les fichiers du thème présents à côté de lui : **la démo reflète toujours le code exact du thème**, et une même branche permet de modifier le thème, sa documentation et sa démo.
+Le dépôt `portfolio-theme` est aussi un site Jekyll complet : sa racine contient, à côté des fichiers du thème, un `_config.yml`, des données (`_data`) et des pages (guides, boîte à outils, projet et articles d'exemple). GitHub Pages le publie à l'adresse <https://makerspace-amiens.fr/portfolio-theme/>. Ce site construit avec les fichiers du thème présents à côté de lui : **la démo reflète toujours le code exact du thème**, et une même branche permet de modifier le thème, sa documentation et sa démo.
 
 Un `remote_theme` ne transmet aux sites étudiants que `_layouts`, `_includes`, `_sass` et `assets`. Le reste du dépôt (pages, `_data`, `_config.yml`, `demo/`) ne les atteint jamais. Les images de la documentation vont donc dans `demo/images/`, **jamais dans `assets/`**, sinon elles seraient copiées dans chaque site étudiant.
 
@@ -33,7 +33,7 @@ Le template, lui, reste volontairement minimal et change peu : un exemple de cha
 
 1. Créer le dépôt **public** `Makerspace-Amiens/portfolio-theme` et y pousser la branche `main`.
 2. Activer Pages : *Settings → Pages → Deploy from a branch → `main` / `(root)`*. La documentation et la démo sont en ligne à <https://makerspace-amiens.fr/portfolio-theme/>.
-3. Vérifier le site : accueil, projets, compétences (radar), blog, docs (TOC + menu), boîte à outils (graphiques, 3D, Mermaid).
+3. Vérifier le site : accueil, projets, blog, docs (TOC + menu), boîte à outils (graphiques, 3D, Mermaid).
 4. Créer un tag et une release :
    ```bash
    git tag v1.0.0
@@ -47,17 +47,13 @@ Le template, lui, reste volontairement minimal et change peu : un exemple de cha
 2. **Settings → General → cocher « Template repository »**.
 3. Pas besoin d'activer Pages sur ce dépôt : la démonstration est le site du thème.
 
-### 1.3 Adapter le référentiel de compétences
+### 1.3 Démarche compétence (en attente)
 
-Dans `_data/competences.yml` du template (et, pour garder une démo cohérente, dans celui du thème), remplacer le référentiel d'exemple par le **référentiel officiel de la formation** :
+Le positionnement sur un référentiel de compétences (radar, niveaux, justifications, preuves automatiques) est **mis de côté** tant que le référentiel et son usage ne sont pas fixés. Rien ne s'en affiche dans le template ni dans la démo.
 
-- garder des `id` stables (`C1`, `C2`… ou les codes officiels) : les étudiants les utilisent dans leurs projets ;
-- renseigner `nom`, `court` (libellé radar, < 20 caractères), `description` ;
-- fixer `niveau_max` et les libellés `niveaux` cohérents avec la grille d'évaluation ;
-- pré-remplir `objectif` si le niveau visé en fin d'I1 est commun à tous ;
-- laisser `niveau: 0` et `justification` vides pour les étudiants (ou garder l'exemple comme illustration la première année).
-
-Un radar reste lisible jusqu'à ~8-10 compétences. Au-delà, regrouper par blocs ou ne montrer que les compétences travaillées en I1.
+- Le code reste dans le thème, en sommeil : `_layouts/competences.html`, `_includes/competences-liees.html`, le bouton « Mes compétences » de l'accueil. Il ne s'active que si le site contient un `_data/competences.yml`.
+- L'état complet (données d'exemple, page, partie du guide étudiant, champs `competences:` des exemples) est conservé dans la branche `archive/competences` des deux dépôts.
+- Pour le réactiver : repartir de cette branche, remplacer le référentiel d'exemple par le référentiel officiel (ids stables, libellés courts de moins de 20 caractères, 8 à 10 compétences au plus pour un radar lisible), puis remettre la page, la partie du guide et les exemples.
 
 ### 1.4 Ajouter le parcours au site de doc
 
@@ -69,12 +65,12 @@ Créer un atelier sur doc.makerspace-amiens.fr, sur le modèle de *Méthodologie
 |---|---|---|
 | 1 | Pourquoi un portfolio ? Démo du [site exemple]({{ '/' | relative_url }}). Création du site, activation Pages, identité | URL du site déposée sur Moodle |
 | 2 | Markdown, « Qui suis-je », CV. Premier article | Page about + CV |
-| 3 | La démarche compétence : lire le référentiel, se positionner, justifier | `competences.yml` renseigné (niveau initial) |
+| 3 | La démarche compétence : en préparation (voir 1.3) | À définir |
 | 4 | Documenter un projet : page projet, médias (graphiques, 3D, KiCad, Mermaid) | 1 projet complet |
 | 5 | Docs et journal de bord, liens avec les projets en cours | 1 doc + 2 entrées de journal |
-| Suivi | Mise à jour au fil des projets de l'année | Radar mis à jour avant chaque évaluation |
+| Suivi | Mise à jour au fil des projets de l'année | Projets et journal à jour avant chaque évaluation |
 
-**Évaluation possible** : qualité des justifications (faits, rôle personnel, recul), cohérence niveau ↔ preuves, régularité du journal de bord, qualité rédactionnelle et respect de la propriété intellectuelle. L'esthétique n'est pas un critère : le thème est commun.
+**Évaluation possible** : rôle personnel et recul dans les pages projet, régularité du journal de bord, qualité rédactionnelle et respect de la propriété intellectuelle. L'esthétique n'est pas un critère : le thème est commun.
 
 **Collecter les URL** : un formulaire ou une feuille partagée (Nom, promo, URL du site, URL du dépôt). L'historique des commits GitHub permet de vérifier la régularité du travail.
 
@@ -120,23 +116,21 @@ Créer `_includes/ma-brique.html`, documenter son usage en commentaire en tête 
 | `icon` | nom Lucide | Si pas d'image |
 | `statut`, `cadre`, `equipe` | texte | Badges |
 | `tags` | liste | Filtres de la page Projets |
-| `competences` | liste d'ids | Preuves automatiques |
 | `liens` | liste `{label, url, icon}` | Boutons |
 | `toc` | booléen | `false` masque la table des matières |
 
 ### Front matter — article (`_posts/AAAA-MM-JJ-*.md`)
 
-`title`, `description`, `categories`, `competences`, `image`, `toc: true` (TOC désactivée par défaut).
+`title`, `description`, `categories`, `image`, `toc: true` (TOC désactivée par défaut).
 
 ### Front matter — doc (`_docs/*.md`)
 
-`title`, `description`, `section` (groupe du menu), `nav_order`, `competences`, `toc: false`.
+`title`, `description`, `section` (groupe du menu), `nav_order`, `toc: false`.
 
 ### Fichiers `_data`
 
 | Fichier | Rôle |
 |---|---|
-| `competences.yml` | Référentiel, niveaux, positionnement, justifications |
 | `cv.yml` | Sections de CV, langues, outils, intérêts, PDF |
 | `navigation.yml` | Menu du haut |
 | `*.yml` libres | Données de graphiques (`donnees="nom"`) |
@@ -149,7 +143,7 @@ Comme les champs de données, ces points ne se renomment pas sans version majeur
 - le chemin `assets/css/perso.css`, chargé après `theme.css` s'il existe dans le dépôt de l'étudiant ;
 - les variables CSS documentées : `--mks-primary`, `--mks-primary-text`, `--mks-surface`, `--mks-dark`, `--mks-radius`.
 
-Pour ajouter une teinte à la palette : un bloc `html[data-couleur="…"]` dans `assets/css/theme.css` (vérifier les contrastes : liens ≥ 4,5:1 sur fond blanc, texte des boutons blanc ou foncé selon la teinte), une ligne dans le `case` de `_includes/head.html` (couleur de la barre du navigateur mobile), puis la mettre à jour dans la partie 11 du guide étudiant, le README et le commentaire de `couleur` dans le `_config.yml` du template.
+Pour ajouter une teinte à la palette : un bloc `html[data-couleur="…"]` dans `assets/css/theme.css` (vérifier les contrastes : liens ≥ 4,5:1 sur fond blanc, texte des boutons blanc ou foncé selon la teinte), une ligne dans le `case` de `_includes/head.html` (couleur de la barre du navigateur mobile), puis la mettre à jour dans la partie 10 du guide étudiant, le README et le commentaire de `couleur` dans le `_config.yml` du template.
 
 Les étudiants qui remplacent un layout ou un include (niveau 3) ne reçoivent plus les corrections de ce fichier : en cas de bug signalé après une mise à jour du thème, demander d'abord s'ils ont des fichiers dans `_layouts/` ou `_includes/`.
 
@@ -162,7 +156,7 @@ Les étudiants qui remplacent un layout ou un include (niveau 3) ne reçoivent p
 | jekyll-remote-theme | MIT | Chargement du thème | https://github.com/benbalter/jekyll-remote-theme |
 | Bulma | MIT | Framework CSS | https://bulma.io/documentation/ |
 | Lucide | ISC | Icônes | https://lucide.dev/icons/ |
-| Chart.js | MIT | Graphiques et radar compétences | https://www.chartjs.org/docs/latest/ |
+| Chart.js | MIT | Graphiques (et radar des compétences, en attente) | https://www.chartjs.org/docs/latest/ |
 | Mermaid | MIT | Diagrammes en texte | https://mermaid.js.org/intro/ |
 | model-viewer | Apache 2.0 | Modèles 3D glTF/GLB | https://modelviewer.dev/docs/ |
 | KiCanvas | MIT | Schémas et PCB KiCad | https://kicanvas.org/ |

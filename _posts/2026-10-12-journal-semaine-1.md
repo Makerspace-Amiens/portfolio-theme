@@ -1,7 +1,6 @@
 ---
 title: "Journal de bord — semaine 1 du robot"
 categories: [journal]
-competences: [C3, C5]
 toc: true
 ---
 

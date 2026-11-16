@@ -3,7 +3,6 @@ title: "Flasher un ESP32 avec l'IDE Arduino"
 description: "Exemple de fiche technique : installer la carte et téléverser un premier programme."
 section: "Électronique"
 nav_order: 10
-competences: [C3]
 ---
 
 ## Prérequis

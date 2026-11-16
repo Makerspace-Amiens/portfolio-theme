@@ -15,7 +15,7 @@ layout: default
           <p class="subtitle is-5">{{ page.hero_subtitle | default: site.author.bio }}</p>
           <div class="buttons">
             <a class="button is-primary" href="{{ '/projets/' | relative_url }}"><i data-lucide="layout-grid" class="mks-icon"></i><span>Mes projets</span></a>
-            <a class="button is-light" href="{{ '/competences/' | relative_url }}"><i data-lucide="radar" class="mks-icon"></i><span>Mes compétences</span></a>
+            {% if site.data.competences.competences %}<a class="button is-light" href="{{ '/competences/' | relative_url }}"><i data-lucide="radar" class="mks-icon"></i><span>Mes compétences</span></a>{% endif %}
             <a class="button is-light" href="{{ '/about/' | relative_url }}"><i data-lucide="user" class="mks-icon"></i><span>Qui suis-je</span></a>
           </div>
         </div>

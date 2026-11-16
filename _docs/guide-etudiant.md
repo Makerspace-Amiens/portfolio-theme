@@ -12,14 +12,13 @@ Il suit la même logique que l'atelier [Méthodologie de projet](https://doc.mak
 
 - Tu écris des fichiers **Markdown** (`.md`) et quelques fichiers de **données** (`.yml`).
 - **GitHub Pages** transforme automatiquement ces fichiers en site web avec **Jekyll**, à chaque modification.
-- L'apparence (couleurs, menus, cartes, radar…) vient du **thème MakerSpace**, appelé par une ligne de `_config.yml`. Tu n'as **pas** de HTML ni de CSS à écrire (tu peux en ajouter si tu veux, voir la [partie 11](#11-personnaliser-lapparence-optionnel)).
+- L'apparence (couleurs, menus, cartes…) vient du **thème MakerSpace**, appelé par une ligne de `_config.yml`. Tu n'as **pas** de HTML ni de CSS à écrire (tu peux en ajouter si tu veux, voir la [partie 10](#10-personnaliser-lapparence-optionnel)).
 
 ```
 _config.yml          ← ton identité + réglages (étape 3)
 index.md             ← page d'accueil
 about.md             ← « Qui suis-je »
 _data/cv.yml         ← ton CV
-_data/competences.yml← tes compétences (radar)
 _data/navigation.yml ← menu du haut
 _projets/            ← 1 fichier = 1 projet (carte)
 _posts/              ← 1 fichier = 1 news / entrée de journal
@@ -27,12 +26,12 @@ _docs/               ← 1 fichier = 1 page de documentation
 assets/              ← images, CV PDF, modèles 3D, fichiers KiCad
 ```
 
-**Le front matter** : chaque page commence par un bloc entre `---` qui contient ses réglages (titre, date, compétences…). Le texte de la page vient en dessous.
+**Le front matter** : chaque page commence par un bloc entre `---` qui contient ses réglages (titre, date, image…). Le texte de la page vient en dessous.
 
 ```markdown
 ---
 title: "Mon titre"
-competences: [C2, C3]
+description: "Une phrase de résumé."
 ---
 
 Le contenu de la page, en Markdown.
@@ -52,7 +51,7 @@ Le contenu de la page, en Markdown.
    - ou un autre nom, par exemple `portfolio` → ton site sera à `https://pseudo.github.io/portfolio/`
 5. Laisse le dépôt **Public**, puis **Create repository**.
 6. Active le site : **Settings → Pages → Build and deployment → Source : Deploy from a branch**, branche **`main`**, dossier **`/ (root)`**, puis **Save**.
-7. Attends 1 à 2 minutes. L'onglet **Actions** montre la construction (rond orange = en cours, coche verte = OK, croix rouge = erreur → voir [Dépannage](#13-dépannage)).
+7. Attends 1 à 2 minutes. L'onglet **Actions** montre la construction (rond orange = en cours, coche verte = OK, croix rouge = erreur → voir [Dépannage](#12-dépannage)).
 8. L'adresse de ton site s'affiche en haut de **Settings → Pages**. Ajoute-la dans la description du dépôt (roue dentée à droite de « About »).
 
 ---
@@ -70,7 +69,7 @@ Ouvre `_config.yml` sur GitHub (icône crayon ✏️) et modifie :
 | `author.name`, `bio`, `formation`, `localisation` | Tes informations |
 | `author.avatar` | Chemin de ta photo (dépose-la dans `assets/images/`, ex. `/assets/images/photo.jpg`) |
 | `author.links` | Tes liens (GitHub, LinkedIn, mail…). Icônes au choix sur [lucide.dev/icons](https://lucide.dev/icons/) |
-| `couleur` | Optionnel : la couleur de ton site (`bleu`, `vert`, `violet`…), voir la [partie 11](#11-personnaliser-lapparence-optionnel) |
+| `couleur` | Optionnel : la couleur de ton site (`bleu`, `vert`, `violet`…), voir la [partie 10](#10-personnaliser-lapparence-optionnel) |
 
 ⚠️ **Ne modifie pas** les blocs `remote_theme`, `plugins`, `collections` et `defaults`, sauf consigne de l'enseignant.
 
@@ -120,7 +119,6 @@ statut: "En cours"                     # En cours / Terminé / En pause
 cadre: "Projet I1 — MakerSpace"
 equipe: "4 personnes"
 tags: [robotique, électronique]        # servent aux filtres de la page Projets
-competences: [C2, C3]                  # ids de _data/competences.yml
 liens:
   - label: "Dépôt GitHub"
     url: "https://github.com/..."
@@ -138,7 +136,7 @@ La carte apparaît automatiquement sur la page **Projets** et, si c'est l'un des
 
 > 💡 Si ton projet a déjà son propre site de documentation (repo issu de *Méthodologie de projet*), ta page projet en fait la **synthèse** et ajoute un lien vers lui dans `liens`.
 
-**Conseil** : la section **« Mon rôle »** est la plus importante. C'est elle qui justifie les compétences que tu associes au projet.
+**Conseil** : la section **« Mon rôle »** est la plus importante. C'est elle qui montre ce que **tu** sais faire, pas seulement ce que l'équipe a réalisé.
 
 ---
 
@@ -188,7 +186,6 @@ Toutes ces briques s'utilisent dans n'importe quelle page. La page [Boîte à ou
 title: "Journal de bord — semaine 3"
 description: "Résumé en une phrase."
 categories: [journal]          # ou [news]
-competences: [C4]              # optionnel : l'article devient une preuve
 toc: true                      # optionnel : table des matières à droite
 ---
 
@@ -213,7 +210,6 @@ title: "Calibrer une imprimante 3D"
 description: "Fiche pratique."
 section: "Fabrication"     # groupe dans le menu de gauche
 nav_order: 20              # ordre dans le menu (plus petit = plus haut)
-competences: [C3]          # optionnel
 ---
 
 ## Étape 1
@@ -226,49 +222,7 @@ competences: [C3]          # optionnel
 
 ---
 
-## 9. Renseigner tes compétences
-
-C'est le cœur de la démarche compétence : montrer **où tu en es** et **le prouver**.
-
-Tout se passe dans **`_data/competences.yml`** :
-
-```yaml
-competences:
-  - id: C3                       # fourni par l'équipe pédagogique, ne pas changer
-    nom: "Prototyper et fabriquer"
-    court: "Prototypage"         # libellé du radar
-    description: "..."
-    niveau: 2                    # TON niveau actuel (0 à niveau_max)
-    objectif: 3                  # niveau visé (fourni ou fixé avec ton tuteur)
-    justification: |
-      Pourquoi je m'attribue ce niveau, en m'appuyant sur des faits.
-    autres_preuves:              # preuves hors du site (stage, certification…)
-      - titre: "Certification sécurité MakerSpace"
-        lien: "https://..."
-        description: "Formé à la découpeuse laser."
-        icon: shield-check
-```
-
-**Les preuves automatiques** : chaque projet, article ou doc qui contient `competences: [C3]` dans son front matter apparaît sous la compétence C3. Tu n'as rien d'autre à faire.
-
-**Le radar** se dessine tout seul (trait plein = niveau actuel, pointillés = niveau visé). Cliquer sur un point fait défiler jusqu'à la compétence.
-
-### Bien justifier un niveau
-
-Une bonne justification répond à trois questions :
-
-1. **Qu'ai-je fait ?** Une situation concrète, avec ton rôle personnel.
-2. **Comment ?** Les méthodes, outils, choix que tu as faits toi-même.
-3. **Qu'est-ce que ça montre ?** Le lien avec le niveau visé, et ce qu'il te reste à travailler.
-
-❌ « Je sais faire de la CAO. »
-✅ « J'ai conçu seul le châssis du robot dans Onshape (3 itérations, voir le projet). Je maîtrise les esquisses contraintes et les assemblages ; je dois progresser sur la mise en plan. »
-
-**Sois honnête** : un niveau 1 bien justifié vaut mieux qu'un niveau 4 sans preuve. Le radar doit **progresser** au fil de l'année, c'est ça qu'on regarde.
-
----
-
-## 10. Travailler en local (optionnel)
+## 9. Travailler en local (optionnel)
 
 Modifier sur GitHub suffit. Pour voir le rendu avant de publier et travailler plus vite :
 
@@ -284,7 +238,7 @@ Modifier sur GitHub suffit. Pour voir le rendu avant de publier et travailler pl
 
 ---
 
-## 11. Personnaliser l'apparence (optionnel)
+## 10. Personnaliser l'apparence (optionnel)
 
 Tous les sites ont la même mise en page : c'est voulu, ce qui compte est **ton contenu**. Tu peux quand même donner ta couleur à ton site, en trois niveaux du plus simple au plus avancé. **Le niveau 1 suffit largement.**
 
@@ -362,16 +316,16 @@ Jekyll utilise en priorité les fichiers de ton dépôt : un fichier `_includes/
 
 ---
 
-## 12. Faire vivre ton site toute l'année
+## 11. Faire vivre ton site toute l'année
 
 | Moment | Ce que tu fais |
 |---|---|
 | **Séance 1** | Créer le site (partie 2), identité (3), photo, premier article « Bienvenue » |
-| **Semaine 2-3** | « Qui suis-je » et CV (4), premier positionnement sur les compétences (9) |
+| **Semaine 2-3** | « Qui suis-je » et CV (4), premier projet (5) |
 | **Chaque séance de projet** | Une entrée de journal de bord (7), 10 minutes |
 | **À chaque jalon de projet** | Mettre à jour la page projet (5), ajouter résultats, photos, graphiques (6) |
 | **Quand tu apprends un savoir-faire** | Une page de doc (8) |
-| **Avant chaque évaluation** | Relire les compétences : niveau, justification, preuves à jour (9) |
+| **Avant chaque évaluation** | Relire tes projets et ton journal : rôle personnel, résultats, preuves à jour (5, 7) |
 | **Fin d'année** | Statut des projets à « Terminé », CV PDF à jour, bilan dans un article |
 | **Avant une candidature (stage, alternance)** | Relecture complète, lien du site dans ton CV et sur LinkedIn |
 
@@ -384,7 +338,7 @@ Jekyll utilise en priorité les fichiers de ton dépôt : un fichier `_includes/
 
 ---
 
-## 13. Dépannage
+## 12. Dépannage
 
 | Symptôme | Cause probable | Solution |
 |---|---|---|
@@ -393,7 +347,6 @@ Jekyll utilise en priorité les fichiers de ton dépôt : un fichier `_includes/
 | Mon article n'apparaît pas | Nom de fichier sans date, ou date future | `AAAA-MM-JJ-titre.md` et date ≤ aujourd'hui |
 | Mon projet n'apparaît pas | Fichier hors de `_projets/` ou front matter absent | Le fichier doit commencer par `---` |
 | Image absente | Chemin ou nom incorrect (majuscules, espaces) | Les chemins sont **sensibles à la casse**. Évite espaces et accents |
-| Une compétence n'a pas de preuve | Id mal écrit | `competences: [C3]`, exactement comme dans `competences.yml` |
 | Le modèle 3D ne s'affiche pas | Fichier STL/STEP ou trop lourd | Convertir en `.glb`, alléger |
 | Le KiCad ne s'affiche pas | Ancien format (KiCad 5) | Ouvrir et réenregistrer dans KiCad 6+ |
 | Mes modifications ne se voient pas | Construction en cours ou cache | Attendre la coche verte, puis **Ctrl+F5** |
