@@ -302,7 +302,7 @@ Tu peux aussi viser un élément précis par sa classe. Pour trouver le nom d'un
 .mks-card { box-shadow: none; border: 1px solid #d1d5db; }
 ```
 
-Les variables sont stables d'une version du thème à l'autre ; les noms de classes peuvent changer lors d'une version majeure. Après un commit, recharge la page avec **Ctrl+F5** : le navigateur garde l'ancien CSS en mémoire.
+Les variables sont stables d'une version du thème à l'autre ; les noms de classes peuvent changer d'une version à l'autre (la note de version le signale). Après un commit, recharge la page avec **Ctrl+F5** : le navigateur garde l'ancien CSS en mémoire.
 
 ### Niveau 3 : remplacer un morceau du thème (avancé)
 

@@ -34,10 +34,10 @@ Le template, lui, reste volontairement minimal et change peu : un exemple de cha
 1. Créer le dépôt **public** `Makerspace-Amiens/portfolio-theme` et y pousser la branche `main`.
 2. Activer Pages : *Settings → Pages → Deploy from a branch → `main` / `(root)`*. La documentation et la démo sont en ligne à <https://makerspace-amiens.fr/portfolio-theme/>.
 3. Vérifier le site : accueil, projets, blog, docs (TOC + menu), boîte à outils (graphiques, 3D, Mermaid).
-4. Créer un tag et une release :
+4. Créer un tag daté (voir [Versionnage](#versionnage-par-date)) et une release :
    ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
+   git tag -a v26.11.16-01 -m "Version 26.11.16-01"
+   git push origin v26.11.16-01
    ```
    Puis *Releases → Draft a new release* sur ce tag, avec une courte note de version.
 
@@ -84,15 +84,19 @@ Créer un atelier sur doc.makerspace-amiens.fr, sur le modèle de *Méthodologie
 4. Pour essayer la branche sur un vrai site étudiant avant publication : `remote_theme: Makerspace-Amiens/portfolio-theme@ajout-galerie` (une branche fonctionne comme un tag).
 5. Fusionner dans `main` (le site de doc se met à jour), puis taguer.
 
-### Versionnage (SemVer)
+### Versionnage par date
 
-| Changement | Version | Impact étudiants |
+Chaque version publiée porte un tag **`vAA.MM.JJ-NN`** : année, mois et jour de la publication sur deux chiffres, puis le numéro de la version du jour, à partir de `01`. Exemples : `v26.11.16-01`, puis `v26.11.16-02` si une seconde version sort le même jour. L'ordre alphabétique des tags est ainsi l'ordre chronologique.
+
+Le numéro ne dit pas si une mise à jour est sans risque : c'est la note de la Release qui le précise.
+
+| Changement | Note de Release | Impact étudiants |
 |---|---|---|
-| Correction de bug, ajustement CSS | `v1.0.1` | Aucun : à annoncer, migration facultative |
-| Nouvel include, nouvelle option | `v1.1.0` | Aucun : nouvelles possibilités |
-| Renommage d'un include, d'un champ de front matter, d'un fichier `_data` | `v2.0.0` | **Migration nécessaire** : rédiger une note dans la Release |
+| Correction de bug, ajustement CSS | Liste des corrections | Aucun : à annoncer, migration facultative |
+| Nouvel include, nouvelle option | Liste des nouveautés | Aucun : nouvelles possibilités |
+| Renommage d'un include, d'un champ de front matter, d'un fichier `_data` | Commence par **Migration nécessaire**, puis décrit chaque modification à faire | Le site peut casser tant que l'étudiant n'a pas migré |
 
-Les étudiants restent sur la version écrite dans leur `_config.yml`. Pour migrer : modifier `@v1.0.0` en `@v1.1.0`, commit, c'est tout. Éviter les changements de version majeure en cours d'année scolaire.
+Les étudiants restent sur la version écrite dans leur `_config.yml`. Pour migrer : remplacer par exemple `@v26.11.16-02` par `@v27.01.12-01`, commit, c'est tout. Éviter les changements cassants en cours d'année scolaire.
 
 > On peut aussi faire pointer les étudiants sur `remote_theme: Makerspace-Amiens/portfolio-theme` sans version : ils suivent alors `main` automatiquement. Plus simple, mais une erreur poussée sur `main` casse **tous** les sites. À réserver si l'équipe teste systématiquement avant de fusionner.
 
@@ -137,7 +141,7 @@ Créer `_includes/ma-brique.html`, documenter son usage en commentaire en tête 
 
 ### Personnalisation (contrat avec les sites étudiants)
 
-Comme les champs de données, ces points ne se renomment pas sans version majeure :
+Comme les champs de données, ces points ne se renomment pas sans une Release « Migration nécessaire » :
 
 - l'option `couleur` de `_config.yml` et les noms de la palette (`rouge`, `bleu`, `vert`, `violet`, `orange`, `turquoise`, `rose`, `gris`), ainsi que l'ancienne option `theme_color` ;
 - le chemin `assets/css/perso.css`, chargé après `theme.css` s'il existe dans le dépôt de l'étudiant ;

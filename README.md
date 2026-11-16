@@ -23,7 +23,7 @@ La démo est construite avec les fichiers du thème présents dans le dépôt : 
 
 ```yaml
 # _config.yml
-remote_theme: Makerspace-Amiens/portfolio-theme@v1.1.0
+remote_theme: Makerspace-Amiens/portfolio-theme@v26.11.16-02
 plugins:
   - jekyll-remote-theme
   - jekyll-feed
@@ -78,9 +78,9 @@ Toutes les bibliothèques sont chargées depuis le CDN jsDelivr (sauf KiCanvas, 
 
 1. Développer sur une branche, tester en local à la racine de ce dépôt : `bundle install` puis `bundle exec jekyll serve`, et ouvrir <http://localhost:4000/portfolio-theme/>.
 2. Mettre à jour la doc et la démo dans la même branche.
-3. Fusionner dans `main` (le site de doc se met à jour), puis **créer un tag** (`v1.1.0`) et une *Release* GitHub.
-4. Les étudiants restent sur leur version tant qu'ils ne changent pas `@vX.Y.Z` dans leur `_config.yml`.
-5. Changement cassant (renommage d'include, de champ de front matter) → version majeure (`v2.0.0`) + note de migration dans la Release.
+3. Fusionner dans `main` (le site de doc se met à jour), puis **créer un tag** daté `vAA.MM.JJ-NN` (ex. `v26.11.16-01`, `NN` = numéro de la version du jour) et une *Release* GitHub.
+4. Les étudiants restent sur leur version tant qu'ils ne changent pas `@vAA.MM.JJ-NN` dans leur `_config.yml`.
+5. Changement cassant (renommage d'include, de champ de front matter) → la Release commence par **Migration nécessaire** et décrit la migration.
 
 Voir le [guide enseignant](https://makerspace-amiens.fr/portfolio-theme/docs/guide-enseignant/).
 
